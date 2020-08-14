@@ -1,2 +1,2 @@
-import vue from "vue";
-export default new vue();
+import vue from 'vue'
+export default new vue()

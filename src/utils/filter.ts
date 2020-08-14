@@ -4,24 +4,24 @@
  * @param unit - 连接符,默认为 .
  * @return 返回格式化后的字符串
  */
-function timeFormat(date: string, unit = "."): string {
+function timeFormat(date: string, unit = '.'): string {
   if (date !== undefined && date.length === 8) {
-    const year = date.substring(0, 4);
-    const month = date.substring(4, 6);
-    const day = date.substring(6, 8);
+    const year = date.substring(0, 4)
+    const month = date.substring(4, 6)
+    const day = date.substring(6, 8)
 
     if (unit === undefined) {
-      unit = "-";
+      unit = '-'
     }
-    if (unit === "ch") {
+    if (unit === 'ch') {
       return (
-        parseInt(year) + "年" + parseInt(month) + "月" + parseInt(day) + "日"
-      );
+        parseInt(year) + '年' + parseInt(month) + '月' + parseInt(day) + '日'
+      )
     } else {
-      return `${year}${unit}${month}${unit}${day}`;
+      return `${year}${unit}${month}${unit}${day}`
     }
   } else {
-    return date;
+    return date
   }
 }
 
@@ -31,14 +31,14 @@ function timeFormat(date: string, unit = "."): string {
  * @param unit - 连接符,默认为 .
  * @return 返回格式化后的字符串
  */
-function getMonthDay(date: string, unit = "."): string {
+function getMonthDay(date: string, unit = '.'): string {
   if (date !== undefined && date.length === 8) {
-    const year = date.substring(0, 4);
-    const month = date.substring(4, 6);
-    const day = date.substring(6, 8);
-    return `${month}${unit}${day}`;
+    const year = date.substring(0, 4)
+    const month = date.substring(4, 6)
+    const day = date.substring(6, 8)
+    return `${month}${unit}${day}`
   } else {
-    return date;
+    return date
   }
 }
 
@@ -50,33 +50,33 @@ function getMonthDay(date: string, unit = "."): string {
  */
 function moneyFormat(val: string, length: number): string {
   if (val) {
-    return val;
+    return val
   }
   if (length === 0) {
-    val = parseInt(val).toString();
+    val = parseInt(val).toString()
   } else if (length && !isNaN(Number(length))) {
     // 将 val 转换为小数位数为 length 的 float 型
-    const number = Number(val);
+    const number = Number(val)
     const numberLength =
-      Math.round(number * Math.pow(10, length)) / Math.pow(10, length);
-    val = numberLength.toFixed(length);
+      Math.round(number * Math.pow(10, length)) / Math.pow(10, length)
+    val = numberLength.toFixed(length)
   }
   if (val) {
-    val = val + "";
-    const array = val.trim().split(".");
-    const num = array[0];
-    num.replace(/(\d)(?=(\d{3}$))/g, "$1,");
+    val = val + ''
+    const array = val.trim().split('.')
+    const num = array[0]
+    num.replace(/(\d)(?=(\d{3}$))/g, '$1,')
     if (num.match(/^([0-9]|[-+])[0-9,]*$/)) {
       if (array.length > 1) {
-        return num.replace(/(\d)(?=(\d{3}$))/g, "$1,") + "." + array[1];
+        return num.replace(/(\d)(?=(\d{3}$))/g, '$1,') + '.' + array[1]
       } else {
-        return num.replace(/(\d)(?=(\d{3}$))/g, "$1,");
+        return num.replace(/(\d)(?=(\d{3}$))/g, '$1,')
       }
     } else {
-      return "0.00";
+      return '0.00'
     }
   } else {
-    return "0.00";
+    return '0.00'
   }
 }
 
@@ -86,42 +86,42 @@ function moneyFormat(val: string, length: number): string {
  * @param type - account:账号，card:银行卡
  * @return 返回格式化后的字符串
  */
-function maskFormat(value: string, type = "account"): string {
-  let text = "";
+function maskFormat(value: string, type = 'account'): string {
+  let text = ''
   switch (type) {
-    case "account":
-      const length = value.length;
+    case 'account':
+      const length = value.length
       switch (length) {
         case 11:
           text = value.replace(
-            new RegExp("(\\d{3})(\\d{4})(\\d{4})"),
-            "$1****$3"
-          );
-          break;
+            new RegExp('(\\d{3})(\\d{4})(\\d{4})'),
+            '$1****$3'
+          )
+          break
         case 15:
           text = value.replace(
-            new RegExp("(\\d{4})(\\d{7})(\\d{4})"),
-            "$1*******$3"
-          );
-          break;
+            new RegExp('(\\d{4})(\\d{7})(\\d{4})'),
+            '$1*******$3'
+          )
+          break
         case 18:
           text = value.replace(
-            new RegExp("(\\d{4})(\\d{10})(\\d{4})"),
-            "$1**********$3"
-          );
-          break;
+            new RegExp('(\\d{4})(\\d{10})(\\d{4})'),
+            '$1**********$3'
+          )
+          break
         default:
-          text = value;
+          text = value
       }
-      break;
-    case "card":
+      break
+    case 'card':
       text = value.replace(
-        new RegExp("(\\d{4})(\\d{4})(\\d{4})(\\d{4})"),
-        "**** **** **** $4"
-      );
-      break;
+        new RegExp('(\\d{4})(\\d{4})(\\d{4})(\\d{4})'),
+        '**** **** **** $4'
+      )
+      break
   }
-  return text;
+  return text
 }
 
 module.exports = {
@@ -129,4 +129,4 @@ module.exports = {
   getMonthDay,
   moneyFormat,
   maskFormat
-};
+}

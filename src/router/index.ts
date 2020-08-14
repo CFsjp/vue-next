@@ -1,39 +1,28 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue'
+import Router, { RouteConfig } from 'vue-router'
 
-Vue.use(VueRouter);
+Vue.use(Router)
 
-interface RoutesType {
-  path: string;
-  name: string;
-  component: () => {};
-  meta?: {
-    index?: number;
-    keepAlive?: boolean;
-  };
-  children?: RoutesType[];
-}
-
-const routes: Array<RoutesType> = [
+const routes: RouteConfig[] = [
   {
-    path: "/",
-    name: "Home",
-    component: () => import("../views/Home.vue")
+    path: '/',
+    name: 'Home',
+    component: () => import('../views/Home.vue')
   },
   {
-    path: "/about",
-    name: "About",
-    component: () => import("../views/About.vue")
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/About.vue')
   },
   {
-    path: "/api",
-    name: "CompositionApi",
-    component: () => import("@/views/composition-api.vue")
+    path: '/api',
+    name: 'CompositionApi',
+    component: () => import('@/views/composition-api.vue')
   }
-];
+]
 
-const router = new VueRouter({
+const router = new Router({
   routes
-});
+})
 
-export default router;
+export default router
