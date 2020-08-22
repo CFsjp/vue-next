@@ -10,22 +10,22 @@
 </template>
 
 <script>
-import { Vue, Component } from "vue-property-decorator";
-import sonPage from "@/components/son-page";
-import brotherPage from "@/components/brother-page";
+import { Vue, Component } from 'vue-property-decorator'
+import sonPage from '@/components/son-page'
+import brotherPage from '@/components/brother-page'
 
 @Component({
   components: { sonPage, brotherPage },
   provide: {
-    fooNew: "父组件的数据"
+    fooNew: '父组件的数据'
   }
 })
 export default class About extends Vue {
-  msg = "我是父组件!";
-  num = 100;
+  msg = '我是父组件!'
+  num = 100
 
   show() {
-    console.log(this.num);
+    console.log(this.num)
   }
 }
 </script>

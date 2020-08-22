@@ -5,7 +5,9 @@
 const argv = process.argv.splice(2)
 
 // 打包体积分析插件
-const BundleAnalyzerPlugin = argv.includes('--analyzer') ? [new(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)()] : []
+const BundleAnalyzerPlugin = argv.includes('--analyzer')
+  ? [new (require('webpack-bundle-analyzer').BundleAnalyzerPlugin)()]
+  : []
 const path = require('path')
 const resolve = (dir) => path.join(__dirname, dir)
 

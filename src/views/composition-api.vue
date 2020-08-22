@@ -7,8 +7,8 @@
 </template>
 
 <script lang="ts">
-import { reactive, computed, ref, onMounted } from "@vue/composition-api";
-
+import { ref, onMounted } from '@vue/composition-api'
+import { useCounter } from './api/useCounter'
 /**
  * setup composition的入口，在beforeCreate和created中间调用，函数返回的内容会作为模板渲染的上下文
  * reactive 负责声明响应式复杂数据结构
@@ -18,26 +18,16 @@ import { reactive, computed, ref, onMounted } from "@vue/composition-api";
  */
 export default {
   setup() {
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    const { state, double } = useCounter(1, 0);
-    const num = ref(2);
+    const { state, double } = useCounter(1, 0)
+    const num = ref(2)
     function add() {
-      state.count++;
-      num.value += 10;
+      state.count++
+      num.value += 10
     }
     onMounted(() => {
-      console.log("mouted");
-    });
-    return { state, add, double, num };
+      console.log('mouted')
+    })
+    return { state, add, double, num }
   }
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function useCounter(count: number, n: unknown) {
-  const state = reactive({
-    count
-  });
-  const double = computed(() => state.count * 2);
-  return { state, double };
 }
 </script>
