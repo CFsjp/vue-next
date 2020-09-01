@@ -17,7 +17,12 @@ import { useCounter } from './api/useCounter'
  * composition api 可以有效的避免上下反复横跳和mixin数据来源不清晰的问题
  */
 export default {
-  setup() {
+  // props是响应式的，解构会使响应式断开
+  // context是普通js对象，不是响应式可以使用解构
+  setup(
+    props,
+    { root, parent, refs, attrs, listeners, isServer, ssrContext, emit }
+  ) {
     const { state, double } = useCounter(1, 0)
     const num = ref(2)
     function add() {
