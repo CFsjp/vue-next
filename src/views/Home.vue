@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <el-button type="primary">主要按钮</el-button>
+    <br />
+    <el-button type="primary">
+      主要按钮
+    </el-button>
   </div>
 </template>
 
@@ -10,3 +13,9 @@ export default {
   name: 'Home'
 }
 </script>
+
+<style lang="scss" scoped>
+.home {
+  text-align: center;
+}
+</style>

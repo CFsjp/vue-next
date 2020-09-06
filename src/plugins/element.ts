@@ -6,9 +6,10 @@
 import Vue from 'vue'
 
 // // 方式一：按需加载
-import { Button, Loading, Message } from 'element-ui'
+import { Button, Loading, Message, Dialog } from 'element-ui'
 
 Vue.use(Button)
+Vue.use(Dialog)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$message = Message

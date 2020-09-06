@@ -1,31 +1,31 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <h1>{{ msg }}</h1>
+    <h1>我是父组件!</h1>
     <input v-model.lazy="num" @change="show" />
     <h2>{{ num }}</h2>
-    <sonPage />
-    <brotherPage />
+    <son-page />
+    <brother-page />
   </div>
 </template>
 
 <script>
-import { Vue, Component } from 'vue-property-decorator'
+import { ref } from '@vue/composition-api'
 import sonPage from '@/components/son-page'
 import brotherPage from '@/components/brother-page'
 
-@Component({
+export default {
   components: { sonPage, brotherPage },
   provide: {
     fooNew: '父组件的数据'
-  }
-})
-export default class About extends Vue {
-  msg = '我是父组件!'
-  num = 100
+  },
 
-  show() {
-    console.log(this.num)
+  setup() {
+    const num = ref(100)
+
+    return {
+      num
+    }
   }
 }
 </script>

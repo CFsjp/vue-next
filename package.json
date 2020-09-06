@@ -1,5 +1,5 @@
 {
-  "name": "vue-next",
+  "name": "vue2-ts-composition-api",
   "version": "1.0.0",
   "scripts": {
     "serve": "vue-cli-service serve",
