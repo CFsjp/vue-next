@@ -25,7 +25,12 @@ import sonDialog from '@/components/son-dialog.vue'
  */
 export default {
   components: { sonDialog },
-  setup() {
+  // props是响应式的，解构会使响应式断开
+  // context是普通js对象，不是响应式可以使用解构
+  setup(
+    props,
+    { root, parent, refs, attrs, listeners, isServer, ssrContext, emit }
+  ) {
     const { state, double } = useCounter(1, 0)
     const num = ref(2)
     const dialogVisible = ref(false)
