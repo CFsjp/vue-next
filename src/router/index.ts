@@ -18,6 +18,11 @@ const routes: RouteConfig[] = [
     path: '/api',
     name: 'CompositionApi',
     component: () => import('@/views/composition-api.vue')
+  },
+  {
+    path: '/amap',
+    name: 'gaoDeMap',
+    component: () => import('@/views/amap.vue')
   }
 ]
 

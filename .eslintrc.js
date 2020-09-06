@@ -11,6 +11,8 @@ module.exports = {
   },
   globals: {
     // 根据不同的项目环境自行配置
+    AMap: false,
+    AMapUI: false
   },
   extends: ['plugin:vue/recommended', 'eslint:recommended'],
   rules: {

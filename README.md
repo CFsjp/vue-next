@@ -35,7 +35,7 @@ vue-next
     - api - 数据的请求方法
     - assets - 共用的静态资源
     - components - 共用的组件
-    - mock - 模拟接口数据
+    - config - 接口地址配置
     - plugins - 使用的插件
     - router - 路由配置
     - store - 全局的状态管理
