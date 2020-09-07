@@ -1,5 +1,5 @@
 <template>
-  <div class="map-wrap">
+  <div class="container">
     <div class="search-box">
       <input v-model="searchKey" type="search" id="search" />
       <button @click="searchByHand">
@@ -35,7 +35,7 @@
 </template>
 
 <style>
-.map-wrap {
+.container {
   width: 100%;
   height: 100%;
   position: absolute;
