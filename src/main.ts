@@ -7,6 +7,7 @@ import store from './store'
 import VueCompositionApi from '@vue/composition-api'
 import './plugins/element.ts'
 import VueAMap from 'vue-amap'
+import '@/styles/index.scss'
 
 Vue.config.productionTip = false
 Vue.use(VueCompositionApi)
@@ -29,7 +30,7 @@ VueAMap.initAMapApiLoader({
     'AMap.Geolocation'
   ],
   // 高德 sdk 版本，默认为 1.4.4
-  v: '1.4.15',
+  v: '1.4.4',
   uiVersion: '1.1'
 })
 

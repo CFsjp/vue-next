@@ -34,57 +34,8 @@
   </div>
 </template>
 
-<style>
-.container {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  border: 1px solid #999;
-}
-
-.search-box {
-  position: absolute;
-  z-index: 5;
-  width: 70%;
-  left: 13%;
-  top: 10px;
-  height: 30px;
-}
-
-.search-box input {
-  float: left;
-  width: 80%;
-  height: 100%;
-  border: 1px solid #30ccc1;
-  padding: 0 8px;
-  outline: none;
-}
-
-.search-box button {
-  float: left;
-  width: 20%;
-  height: 100%;
-  background: #30ccc1;
-  border: 1px solid #30ccc1;
-  color: #fff;
-  outline: none;
-}
-
-.tip-box {
-  width: 100%;
-  max-height: 260px;
-  position: absolute;
-  top: 30px;
-  overflow-y: auto;
-  background-color: #fff;
-}
-</style>
-
 <script>
-import { AMapManager, lazyAMapApiLoaderInstance } from 'vue-amap'
+import { AMapManager } from 'vue-amap'
 
 const amapManager = new AMapManager()
 export default {
@@ -94,7 +45,7 @@ export default {
       address: null,
       searchKey: '',
       amapManager,
-      markers: [],
+      markers: [100.329402, 31.228667],
       searchOption: {
         city: '全国',
         citylimit: true
@@ -256,3 +207,52 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  border: 1px solid #999;
+}
+
+.search-box {
+  position: absolute;
+  z-index: 5;
+  width: 70%;
+  left: 13%;
+  top: 10px;
+  height: 30px;
+}
+
+.search-box input {
+  float: left;
+  width: 80%;
+  height: 100%;
+  border: 1px solid #30ccc1;
+  padding: 0 8px;
+  outline: none;
+}
+
+.search-box button {
+  float: left;
+  width: 20%;
+  height: 100%;
+  background: #30ccc1;
+  border: 1px solid #30ccc1;
+  color: #fff;
+  outline: none;
+}
+
+.tip-box {
+  width: 100%;
+  max-height: 260px;
+  position: absolute;
+  top: 30px;
+  overflow-y: auto;
+  background-color: #fff;
+}
+</style>

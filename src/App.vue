@@ -10,47 +10,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-html,
-body,
-#app {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/*---滚动条默认显示样式--*/
-::-webkit-scrollbar-thumb {
-  background-color: #018ee8;
-  height: 50px;
-  outline-offset: -2px;
-  outline: 2px solid #fff;
-  border-radius: 4px;
-  border: 2px solid #fff;
-}
-
-/*---滚动条大小--*/
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-/*---滚动框背景样式--*/
-::-webkit-scrollbar-track-piece {
-  background-color: #fff;
-  border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb:active {
-  height: 50px;
-  background-color: #000;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #fb4446;
-  height: 50px;
-  border-radius: 4px;
-}
-</style>
+<style lang="scss" scoped></style>
