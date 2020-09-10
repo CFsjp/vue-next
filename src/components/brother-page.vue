@@ -13,22 +13,25 @@
 </template>
 
 <script>
-import { Vue, Component } from "vue-property-decorator";
-import Bus from "@/utils/eventBus.ts";
+import Bus from '@/utils/eventBus.ts'
 
-@Component
-export default class SonPage extends Vue {
-  msg = "我是兄弟组件!";
-  name = "王亚兰";
-  age = "18";
-
+export default {
+  data() {
+    return {
+      msg: '我是兄弟组件!',
+      name: '王亚兰',
+      age: '18'
+    }
+  },
   created() {
-    Bus.$on("sendData", this.changData);
-  }
+    Bus.$on('sendData', this.changData)
+  },
 
-  changData(val) {
-    this.age = val.age;
-    this.name = val.name;
+  methods: {
+    changData(val) {
+      this.age = val.age
+      this.name = val.name
+    }
   }
 }
 </script>

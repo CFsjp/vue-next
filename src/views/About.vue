@@ -2,9 +2,12 @@
   <div class="about">
     <h1>This is an about page</h1>
     <h1>我是父组件!</h1>
-    <input v-model.lazy="num" @change="show" />
+    <!-- <input v-model.lazy="num" @change="show" /> -->
     <h2>{{ num }}</h2>
-    <son-page />
+    <el-button @click="handleClick">
+      点击调用子组件方法
+    </el-button>
+    <son-page ref="sonPage" />
     <brother-page />
   </div>
 </template>
@@ -25,6 +28,11 @@ export default {
 
     return {
       num
+    }
+  },
+  methods: {
+    handleClick() {
+      this.$refs.sonPage.sing()
     }
   }
 }

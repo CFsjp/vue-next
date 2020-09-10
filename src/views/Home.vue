@@ -1,10 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <br />
-    <el-button type="primary">
-      主要按钮
-    </el-button>
+    <h1>数组去重</h1>
     <div>{{ arr }}</div>
     <div>{{ arr2 }}</div>
   </div>
@@ -12,7 +8,7 @@
 
 <script>
 import { computed, reactive } from '@vue/composition-api'
-import { unique2 } from '@/utils/unique-array'
+import { uniqueArrayByItem } from '@/utils/unique-array'
 
 export default {
   name: 'Home',
@@ -26,7 +22,7 @@ export default {
       [1, 2, 3]
     ])
 
-    const arr2 = computed(() => unique2(arr))
+    const arr2 = computed(() => uniqueArrayByItem(arr))
 
     return {
       arr,

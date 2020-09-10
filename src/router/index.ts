@@ -23,6 +23,11 @@ const routes: RouteConfig[] = [
     path: '/amap',
     name: 'gaoDeMap',
     component: () => import('@/views/amap.vue')
+  },
+  {
+    path: '/upload',
+    name: 'upload',
+    component: () => import('@/components/upload.vue')
   }
 ]
 
