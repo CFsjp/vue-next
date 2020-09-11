@@ -1,258 +1,132 @@
 <template>
   <div class="container">
-    <div class="search-box">
-      <input v-model="searchKey" type="search" id="search" />
-      <button @click="searchByHand">
-        搜索
-      </button>
-      <div class="tip-box" id="searchTip"></div>
+    <div id="amap"></div>
+    <div class="btn">
+      <el-button @click="addMarker">
+        addMarker
+      </el-button>
+      <el-button @click="provinceMarker(positions)">
+        provinceMarker
+      </el-button>
+      <el-button @click="clearMarker">
+        clearMarker
+      </el-button>
     </div>
-    <!--
-          amap-manager： 地图管理对象
-          vid：地图容器节点的ID
-          zooms： 地图显示的缩放级别范围，在PC上，默认范围[3,18]，取值范围[3-18]；在移动设备上，默认范围[3-19]，取值范围[3-19]
-          center： 地图中心点坐标值
-          plugin：地图使用的插件
-          events： 事件
-        -->
-    <el-amap
-      class="amap-box"
-      :amap-manager="amapManager"
-      :vid="'amap-vue'"
-      :zoom="zoom"
-      :plugin="plugin"
-      :center="center"
-      :events="events"
-    >
-      <!-- 标记 -->
-      <el-amap-marker
-        v-for="(marker, index) in markers"
-        :position="marker"
-        :key="index"
-      ></el-amap-marker>
-    </el-amap>
   </div>
 </template>
 
 <script>
-import { AMapManager } from 'vue-amap'
+import AMap from 'AMap' // 引入高德地图
 
-const amapManager = new AMapManager()
 export default {
   data() {
-    const self = this
     return {
-      address: null,
-      searchKey: '',
-      amapManager,
-      markers: [100.329402, 31.228667],
-      searchOption: {
-        city: '全国',
-        citylimit: true
-      },
-      center: [121.329402, 31.228667],
-      zoom: 17,
-      lng: 0,
-      lat: 0,
-      loaded: false,
-      events: {
-        init() {
-          lazyAMapApiLoaderInstance.load().then(() => {
-            self.initSearch()
-          })
-        },
-        // 点击获取地址的数据
-        click(e) {
-          // console.log(e)
-          self.markers = []
-          const { lng, lat } = e.lnglat
-          self.lng = lng
-          self.lat = lat
-          self.center = [lng, lat]
-          self.markers.push([lng, lat])
-          // 这里通过高德 SDK 完成。
-          const geocoder = new AMap.Geocoder({
-            radius: 1000,
-            extensions: 'all'
-          })
-          geocoder.getAddress([lng, lat], function(status, result) {
-            if (status === 'complete' && result.info === 'OK') {
-              if (result && result.regeocode) {
-                console.log(result.regeocode.formattedAddress)
-                self.address = result.regeocode.formattedAddress
-                self.searchKey = result.regeocode.formattedAddress
-                self.$nextTick()
-              }
-            }
-          })
-        }
-      },
-      // 一些工具插件
-      plugin: [
-        // {
-        //   pName: 'Geocoder',
-        //   events: {
-        //     init (o) {
-        //       console.log(o.getAddress())
-        //     }
-        //   }
-        // },
-        {
-          // 定位
-          pName: 'Geolocation',
-          events: {
-            init(o) {
-              // o是高德地图定位插件实例
-              o.getCurrentPosition((status, result) => {
-                if (result && result.position) {
-                  // 设置经度
-                  self.lng = result.position.lng
-                  // 设置维度
-                  self.lat = result.position.lat
-                  // 设置坐标
-                  self.center = [self.lng, self.lat]
-                  self.markers.push([self.lng, self.lat])
-                  // load
-                  self.loaded = true
-                  // 页面渲染好后
-                  self.$nextTick()
-                }
-              })
-            }
-          }
-        },
-        {
-          // 工具栏
-          pName: 'ToolBar',
-          events: {
-            init(instance) {
-              console.log(instance)
-            }
-          }
-        },
-        {
-          // 鹰眼
-          pName: 'OverView',
-          events: {
-            init(instance) {
-              console.log(instance)
-            }
-          }
-        },
-        {
-          // 地图类型
-          pName: 'MapType',
-          defaultType: 0,
-          events: {
-            init(instance) {
-              console.log(instance)
-            }
-          }
-        },
-        {
-          // 搜索
-          pName: 'PlaceSearch',
-          events: {
-            init(instance) {
-              console.log(instance)
-            }
-          }
-        }
-      ]
+      map: null,
+      marker: null,
+      positions: {
+        山东: [117.000923, 36.675807],
+        河北: [115.48333, 38.03333],
+        吉林: [125.35, 43.88333],
+        黑龙江: [127.63333, 47.75],
+        辽宁: [123.38333, 41.8],
+        内蒙古: [111.670801, 41.818311],
+        新疆: [87.68333, 43.76667],
+        甘肃: [103.73333, 36.03333],
+        宁夏: [106.26667, 37.46667],
+        山西: [112.53333, 37.86667],
+        陕西: [108.95, 34.26667],
+        河南: [113.65, 34.76667],
+        安徽: [117.283042, 31.86119],
+        江苏: [119.78333, 32.05],
+        浙江: [120.2, 30.26667],
+        福建: [118.3, 26.08333],
+        广东: [113.23333, 23.16667],
+        江西: [115.9, 28.68333],
+        海南: [110.35, 20.01667],
+        广西: [108.320004, 22.82402],
+        贵州: [106.71667, 26.56667],
+        湖南: [113.0, 28.21667],
+        湖北: [114.298572, 30.584355],
+        四川: [104.06667, 30.66667],
+        云南: [102.73333, 25.05],
+        西藏: [91.0, 30.6],
+        青海: [96.75, 36.56667],
+        天津: [117.2, 39.13333],
+        上海: [121.55333, 31.2],
+        重庆: [106.45, 29.56667],
+        北京: [116.41667, 39.91667],
+        台湾: [121.3, 25.03],
+        香港: [114.1, 22.2],
+        澳门: [113.5, 22.2]
+      }
     }
   },
+  mounted() {
+    document.title = '高德地图'
+    this.init()
+  },
   methods: {
-    initSearch() {
-      const vm = this
-      const map = this.amapManager.getMap()
-      AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
-        const poiPicker = new PoiPicker({
-          input: 'search',
-          placeSearchOptions: {
-            map,
-            pageSize: 10
-          },
-          suggestContainer: 'searchTip',
-          searchResultsContainer: 'searchTip'
-        })
-        vm.poiPicker = poiPicker
-        // 监听poi选中信息
-        poiPicker.on('poiPicked', function(poiResult) {
-          // console.log(poiResult)
-          const source = poiResult.source
-          const poi = poiResult.item
-          if (source !== 'search') {
-            poiPicker.searchByKeyword(poi.name)
-          } else {
-            poiPicker.clearSearchResults()
-            vm.markers = []
-            const lng = poi.location.lng
-            const lat = poi.location.lat
-            const address = poi.cityname + poi.adname + poi.name
-            vm.center = [lng, lat]
-            vm.markers.push([lng, lat])
-            vm.lng = lng
-            vm.lat = lat
-            vm.address = address
-            vm.searchKey = address
-          }
-        })
+    init() {
+      this.map = new AMap.Map('amap', {
+        center: [108.95, 34.26667],
+        resizeEnable: true,
+        zoom: 5
+      })
+      this.map.plugin(['AMap.ToolBar'], function() {
+        this.map.addControl(new AMap.ToolBar())
+      })
+      this.map.plugin(['AMap.MouseTool'], function() {
+        const mouseTool = new AMap.MouseTool(this.map)
+        // 使用鼠标工具，在地图上画标记点
+        mouseTool.marker()
       })
     },
-    searchByHand() {
-      if (this.searchKey !== '') {
-        this.poiPicker.searchByKeyword(this.searchKey)
+    addMarker() {
+      // 创建一个 Marker 实例：
+      this.marker = new AMap.Marker({
+        position: new AMap.LngLat(116.39, 39.9), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+        title: '北京'
+      })
+      // 将创建的点标记添加到已有的地图实例：
+      this.marker.setMap(this.map)
+    },
+    clearMarker() {
+      if (this.marker) {
+        // 清除点标记使用marker.setMap(null)
+        // 坑：并且为了下次使用，marker也得清掉
+        this.marker.setMap(null)
+        this.marker = null
+      } else {
+        // 全部清除
+        this.map.clearMap()
       }
+    },
+    provinceMarker(positions) {
+      const markers = []
+      Object.keys(positions).forEach((key) => {
+        const marker = new AMap.Marker({
+          position: positions[key],
+          title: key,
+          map: this.map
+        })
+        markers.push(marker)
+      })
+      this.map.setFitView()
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.container {
+.container,
+#amap {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+.btn {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  border: 1px solid #999;
-}
-
-.search-box {
-  position: absolute;
-  z-index: 5;
-  width: 70%;
-  left: 13%;
-  top: 10px;
-  height: 30px;
-}
-
-.search-box input {
-  float: left;
-  width: 80%;
-  height: 100%;
-  border: 1px solid #30ccc1;
-  padding: 0 8px;
-  outline: none;
-}
-
-.search-box button {
-  float: left;
-  width: 20%;
-  height: 100%;
-  background: #30ccc1;
-  border: 1px solid #30ccc1;
-  color: #fff;
-  outline: none;
-}
-
-.tip-box {
-  width: 100%;
-  max-height: 260px;
-  position: absolute;
-  top: 30px;
-  overflow-y: auto;
-  background-color: #fff;
+  top: 0;
+  right: 0;
 }
 </style>

@@ -6,7 +6,6 @@ import store from './store'
 // 插件
 import VueCompositionApi from '@vue/composition-api'
 import './plugins/element.ts'
-import './plugins/amap.js'
 import '@/styles/index.scss'
 
 Vue.config.productionTip = false
