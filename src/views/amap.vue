@@ -11,18 +11,39 @@
       <el-button @click="clearMarker">
         clearMarker
       </el-button>
+      <el-button @click="handleMouseTool('marker')">
+        画点
+      </el-button>
+      <el-button @click="handleMouseTool('polyline')">
+        画折线
+      </el-button>
+      <el-button @click="handleMouseTool('polygon')">
+        画多边形
+      </el-button>
+      <el-button @click="handleMouseTool('rectangle')">
+        画矩形
+      </el-button>
+      <el-button @click="handleMouseTool('circle')">
+        画圆
+      </el-button>
+      <el-button @click="clearMouseTool">
+        clearMouseTool
+      </el-button>
     </div>
   </div>
 </template>
 
 <script>
-import AMap from 'AMap' // 引入高德地图
+// import AMap from 'AMap' // 引入高德地图
+import { createMap } from '@/plugins/amap'
 
 export default {
   data() {
     return {
       map: null,
       marker: null,
+      mouseTool: null,
+      overlays: null,
       positions: {
         山东: [117.000923, 36.675807],
         河北: [115.48333, 38.03333],
@@ -67,18 +88,32 @@ export default {
   },
   methods: {
     init() {
-      this.map = new AMap.Map('amap', {
-        center: [108.95, 34.26667],
-        resizeEnable: true,
-        zoom: 5
-      })
-      this.map.plugin(['AMap.ToolBar'], function() {
-        this.map.addControl(new AMap.ToolBar())
-      })
-      this.map.plugin(['AMap.MouseTool'], function() {
-        const mouseTool = new AMap.MouseTool(this.map)
-        // 使用鼠标工具，在地图上画标记点
-        mouseTool.marker()
+      const params = {
+        id: 'amap',
+        zoom: 5,
+        center: [108.95, 34.26667]
+      }
+      createMap(params).then((map) => {
+        // 懒加载地图
+        map.plugin(
+          [
+            'AMap.MouseTool',
+            'AMap.ToolBar',
+            'AMap.Scale',
+            'AMap.OverView',
+            'AMap.MapType',
+            'AMap.Geolocation'
+          ],
+          () => {
+            map.addControl(new AMap.ToolBar({ liteStyle: true })) // 在图面添加比例尺控件，展示地图在当前层级和纬度下的比例尺
+            map.addControl(new AMap.Scale()) // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
+            map.addControl(new AMap.OverView({ isOpen: true })) // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
+            map.addControl(new AMap.MapType()) // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
+            map.addControl(new AMap.Geolocation()) // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
+            this.mouseTool = new AMap.MouseTool(map) //工具实例
+          }
+        )
+        this.map = map
       })
     },
     addMarker() {
@@ -112,6 +147,22 @@ export default {
         markers.push(marker)
       })
       this.map.setFitView()
+    },
+    // 处理矢量图形
+    handleMouseTool(type) {
+      const option = {
+        fillColor: '#00b0ff',
+        strokeColor: '#80d8ff'
+      }
+      this.mouseTool[type](option) // 添加矢量图形方法
+      this.map.on('mousemove', () => {
+        this.overlays = this.map.getAllOverlays()
+      })
+    },
+    clearMouseTool() {
+      this.map.remove(this.overlays)
+      this.overlays = []
+      this.map.off('mousemove')
     }
   }
 }
@@ -127,6 +178,6 @@ export default {
 .btn {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
 }
 </style>

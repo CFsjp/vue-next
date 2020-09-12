@@ -24,7 +24,7 @@
     "tests/**/*.ts",
     "tests/**/*.tsx",
     "src/views/hooks/tip-message.js",
-    "src/main.js"
+    "src/main.js", "src/plugins/amap.js"
   ],
   "exclude": ["node_modules"]
 }
