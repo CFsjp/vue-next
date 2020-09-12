@@ -29,6 +29,15 @@
       <el-button @click="clearMouseTool">
         clearMouseTool
       </el-button>
+      <el-button @click="console">
+        打印
+      </el-button>
+      <el-button @click="setLayer('卫星')">
+        卫星地图
+      </el-button>
+      <el-button @click="setLayer('标准')">
+        标准地图
+      </el-button>
     </div>
   </div>
 </template>
@@ -105,12 +114,12 @@ export default {
             'AMap.Geolocation'
           ],
           () => {
-            map.addControl(new AMap.ToolBar({ liteStyle: true })) // 在图面添加比例尺控件，展示地图在当前层级和纬度下的比例尺
-            map.addControl(new AMap.Scale()) // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
-            map.addControl(new AMap.OverView({ isOpen: true })) // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
-            map.addControl(new AMap.MapType()) // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
+            map.addControl(new AMap.ToolBar({ liteStyle: true })) // 地图工具条插件，可以用来控制地图的缩放和平移
+            // map.addControl(new AMap.Scale()) // 地图比例尺插件
+            // map.addControl(new AMap.OverView({ isOpen: true })) // 地图鹰眼插件，默认在地图右下角显示缩略图
+            // map.addControl(new AMap.MapType({ showTraffic: false, showRoad: false })) // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
             map.addControl(new AMap.Geolocation()) // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
-            this.mouseTool = new AMap.MouseTool(map) //工具实例
+            this.mouseTool = new AMap.MouseTool(map) // 工具实例
           }
         )
         this.map = map
@@ -163,6 +172,30 @@ export default {
       this.map.remove(this.overlays)
       this.overlays = []
       this.map.off('mousemove')
+    },
+    console() {
+      const info = this.overlays.map(i => i.getOptions())
+      // const bound = this.overlays.map(i => i.getBounds())
+      console.log(info)
+      // console.log(this.overlays)
+    },
+    getMarkerArea(marker, className) {
+      if (className === 'AMap.Polyline') {
+        return marker.getArea() // 多边形面积
+      } else if (className === 'AMap.Circle') {
+        return
+      } else {
+        return
+      }
+    },
+    setLayer(layerName) {
+      let layer = null
+      if (layerName === '卫星') {
+        layer = [new AMap.TileLayer.Satellite({ detectRetina: true })]
+      } else {
+        layer = [new AMap.TileLayer({ detectRetina: true })]
+      }
+      this.map.setLayers(layer)
     }
   }
 }
