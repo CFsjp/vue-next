@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <h1>数组去重</h1>
+    <!-- <h1>数组去重</h1>
     <div>{{ arr }}</div>
-    <div>{{ arr2 }}</div>
+    <div>{{ arr2 }}</div> -->
+    <h1>加油，上进！</h1>
   </div>
 </template>
 

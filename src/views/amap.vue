@@ -38,6 +38,9 @@
       <el-button @click="setLayer('标准')">
         标准地图
       </el-button>
+      <el-button @click="getMarkerArea(overlays[0])">
+        面积
+      </el-button>
     </div>
   </div>
 </template>
@@ -174,18 +177,31 @@ export default {
       this.map.off('mousemove')
     },
     console() {
-      const info = this.overlays.map(i => i.getOptions())
+      // const info = this.overlays.map((i) => i.getOptions())
       // const bound = this.overlays.map(i => i.getBounds())
-      console.log(info)
-      // console.log(this.overlays)
+      alert(this.overlays[0].getExtData())
     },
-    getMarkerArea(marker, className) {
-      if (className === 'AMap.Polyline') {
+    getMarkerArea(marker) {
+      if (marker.CLASS_NAME === 'AMap.Polyline') {
+        alert(marker.getArea())
         return marker.getArea() // 多边形面积
-      } else if (className === 'AMap.Circle') {
-        return
+      } else if (marker.CLASS_NAME === 'AMap.Circle') {
+        // 圆面积
+        alert(Math.round(Math.pow(marker.getRadius() / 1000, 2) * 3.1415926))
+        return Math.round(Math.pow(marker.getRadius() / 1000, 2) * 3.1415926)
+      } else if (marker.CLASS_NAME === 'AMap.rectangle') {
+        // 矩形面积
+        alert(
+          AMap.GeometryUtil.ringArea(
+            marker.getOptions().path.map((i) => [i.lng, i.lat])
+          )
+        )
+        return AMap.GeometryUtil.ringArea(
+          marker.path.map((i) => [i.lng, i.lat])
+        )
       } else {
-        return
+        alert(marker.getPosition())
+        console.log(marker.getPosition())
       }
     },
     setLayer(layerName) {
