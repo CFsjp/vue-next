@@ -6,11 +6,21 @@
 import Vue from 'vue'
 
 // // 方式一：按需加载
-import { Button, Loading, Message, Dialog, Upload } from 'element-ui'
+import {
+  Button,
+  Loading,
+  Message,
+  Dialog,
+  Upload,
+  Input,
+  Autocomplete
+} from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Dialog)
 Vue.use(Upload)
+Vue.use(Input)
+Vue.use(Autocomplete)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$message = Message
@@ -20,3 +30,15 @@ Vue.prototype.$message = Message
 // import 'element-ui/lib/theme-chalk/index.css'
 
 // Vue.use(ElementUI)
+
+// const oldArrayFunc = Array.prototype
+// const proto = Object.create(oldArrayFunc)
+
+// const arrFunc = ['push', 'unshift', 'pop']
+
+// arrFunc.forEach(method => {
+//   proto[method] = (method) => {
+//     updated() // 更新视图
+//     oldArrayFunc[method]
+//   }
+// })
