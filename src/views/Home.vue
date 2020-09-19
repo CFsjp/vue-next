@@ -4,6 +4,15 @@
     <div>{{ arr }}</div>
     <div>{{ arr2 }}</div> -->
     <h1>加油，上进！</h1>
+    1、覆盖激活
+    <el-tooltip content="Bottom center" placement="bottom" effect="light">
+      <div slot="content">
+        <span>1.所选的表必须设有主键，并且是单字段主键</span>
+        <br />
+        <span>2.必须保证主键长度至少19位</span>
+      </div>
+      <el-button>Light</el-button>
+    </el-tooltip>
   </div>
 </template>
 

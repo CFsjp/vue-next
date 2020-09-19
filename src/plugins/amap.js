@@ -26,7 +26,7 @@ export function createMap({
   zoom = 4,
   mapStyle = 'amap://styles/fresh'
 }) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     getMap().then(() => {
       const map = new AMap.Map(id, {
         zoom, // 地图放大级别
@@ -40,7 +40,7 @@ export function createMap({
 }
 
 function getMap() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if (window.AMap) {
       resolve()
     } else {
