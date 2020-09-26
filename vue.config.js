@@ -44,7 +44,7 @@ module.exports = {
   configureWebpack: {
     plugins: [...BundleAnalyzerPlugin],
     externals: {
-      'AMap': 'AMap' // 高德地图配置
+      AMap: 'AMap' // 高德地图配置
     }
   }
 }

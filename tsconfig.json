@@ -22,9 +22,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "src/views/hooks/tip-message.js",
-    "src/main.js", "src/plugins/amap.js"
+    "tests/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }
