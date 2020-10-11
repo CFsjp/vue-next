@@ -9,7 +9,7 @@
       value-key="value"
       :fetch-suggestions="querySearchAsync"
       placeholder="请输入内容"
-      @select="handleSelect"
+      @select="(item) => handleSelect(item, '1')"
     ></el-autocomplete>
     <el-tooltip content="Bottom center" placement="bottom" effect="light">
       <div slot="content">
@@ -187,8 +187,8 @@ export default defineComponent({
         return i.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
       }
     },
-    handleSelect(item:object) {
-      console.log(item)
+    handleSelect(item:object, num:number) {
+      console.log(item, num)
     }
   }
 })
