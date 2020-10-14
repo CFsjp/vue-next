@@ -13,10 +13,17 @@
       :model="ruleForm"
       :rules="rules"
       ref="ruleForm"
-      label-width="100px"
+      label-width="70px"
+      class="form"
     >
-      <el-form-item label="输入框" :prop="value">
-        <el-input v-model="ruleForm.value"></el-input>
+      <el-form-item v-show="value==='name'" label="输入框" :prop="value">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item v-show="value==='age'" label="输入框" :prop="value">
+        <el-input v-model="ruleForm.age"></el-input>
+      </el-form-item>
+      <el-form-item v-show="value==='tel'" label="输入框" :prop="value">
+        <el-input v-model="ruleForm.tel"></el-input>
       </el-form-item>
     </el-form>
   </div>
@@ -35,7 +42,7 @@ export default {
 }
 
 function useSelect() {
-  const value = ref('')
+  const value = ref('name')
   const options = [
     {
       value: 'name',
@@ -55,20 +62,21 @@ function useSelect() {
 }
 
 function useForm() {
-  const ruleForm = reactive({ value: '' })
+  // el-form中，prop对应的 字段名，必须和下面表单中的字段名一致，否则无法校验到
+  const ruleForm = reactive({ name: '', age: '', tel: '' })
   const rules = {
     name: [
       { required: true, message: '请输入姓名', trigger: 'blur' },
-      { min: 3, max: 15, message: '请输入合适长度的姓名', trigger: 'change' }
+      { min: 3, max: 6, message: '请输入合适长度的姓名', trigger: 'change' }
     ],
     age: [
       { required: true, message: '请输入年龄', trigger: 'blur' },
-      { type: 'number', message: '年龄必须为数字', trigger: 'change' }
+      { type: 'number', message: '年龄必须为数字', trigger: 'blur' }
     ],
     tel: [
       { required: true, message: '请输入电话号码', trigger: 'blur' },
-      { len: 11, message: '手机号是11位数字' },
-      { pattern: /1[0-9]{10}/, message: '错误的手机号格式' }
+      { len: 11, message: '手机号是11位数字', trigger: 'change' },
+      { pattern: /1[0-9]{10}/, message: '错误的手机号格式', trigger: 'change' }
     ]
   }
 
@@ -76,4 +84,8 @@ function useForm() {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.form {
+  width: 217px;
+}
+</style>
