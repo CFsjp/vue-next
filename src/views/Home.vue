@@ -27,7 +27,13 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, reactive, watch, defineComponent } from '@vue/composition-api'
+import {
+  ref,
+  computed,
+  reactive,
+  watch,
+  defineComponent
+} from '@vue/composition-api'
 import { uniqueArrayByItem } from '@/utils/unique-array'
 import '@/views/hooks/proxy'
 
@@ -152,7 +158,9 @@ export default defineComponent({
     const date = ref(new Date())
     const showTime = ref(false)
     const num = ref(0)
-    const add = () => { num.value += 1 }
+    const add = () => {
+      num.value += 1
+    }
 
     watch(num, (newNum, oldNum) => {
       console.log('newNum', newNum, 'oldNum', oldNum)
@@ -169,8 +177,11 @@ export default defineComponent({
       add
     }
   },
+  mounted() {
+    this.test()
+  },
   methods: {
-    querySearchAsync(queryString:string, cb:any) {
+    querySearchAsync(queryString: string, cb: any) {
       const restaurants = this.restaurants
       const results = queryString
         ? restaurants.filter(this.createStateFilter(queryString))
@@ -182,13 +193,23 @@ export default defineComponent({
 
       clearTimeout(timeout)
     },
-    createStateFilter(queryString:string) {
-      return (i:any) => {
+    createStateFilter(queryString: string) {
+      return (i: any) => {
         return i.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
       }
     },
-    handleSelect(item:object, num:number) {
+    handleSelect(item: object, num: number) {
       console.log(item, num)
+    },
+    test() {
+      const arr = [[{ id: 1 }]]
+      arr.forEach((el) => {
+        el.forEach((item) => {
+          const msg = { id: 1, name: 'zs' }
+          item = msg
+        })
+      })
+      console.log(arr)
     }
   }
 })

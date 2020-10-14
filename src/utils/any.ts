@@ -15,33 +15,33 @@ export function deepClone(target: any) {
   return result
 }
 
-// 防抖and节流
-export function debounce(fn: Function, delay?: number) {
-  delay = delay || 500
-  let timer: number | null | undefined
-  return function() {
-    const ctx = this
-    if (timer) {
-      clearTimeout(timer)
-    }
-    timer = setTimeout(() => {
-      timer = null
-      fn.apply(ctx, arguments)
-    }, delay)
-  }
-}
+// // 防抖and节流
+// export function debounce(fn: Function, delay?: number) {
+//   delay = delay || 500
+//   let timer: number | null | undefined
+//   return function() {
+//     const ctx = this
+//     if (timer) {
+//       clearTimeout(timer)
+//     }
+//     timer = setTimeout(() => {
+//       timer = null
+//       fn.apply(ctx, arguments)
+//     }, delay)
+//   }
+// }
 
-// 节流
-export function throttle(fn: Function, delay: number) {
-  delay = delay || 500
-  let canRun = true // 通过闭包保存一个标记
-  return function() {
-    const ctx = this
-    if (!canRun) return
-    canRun = false
-    setTimeout(() => {
-      fn.apply(ctx, arguments)
-      canRun = true
-    }, delay)
-  }
-}
+// // 节流
+// export function throttle(fn: Function, delay: number) {
+//   delay = delay || 500
+//   let canRun = true // 通过闭包保存一个标记
+//   return function() {
+//     const ctx = this
+//     if (!canRun) return
+//     canRun = false
+//     setTimeout(() => {
+//       fn.apply(ctx, arguments)
+//       canRun = true
+//     }, delay)
+//   }
+// }

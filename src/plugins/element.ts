@@ -14,7 +14,11 @@ import {
   Upload,
   Input,
   Autocomplete,
-  Tooltip
+  Tooltip,
+  Select,
+  Option,
+  Form,
+  FormItem
 } from 'element-ui'
 
 Vue.use(Button)
@@ -23,6 +27,10 @@ Vue.use(Upload)
 Vue.use(Input)
 Vue.use(Autocomplete)
 Vue.use(Tooltip)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(Form)
+Vue.use(FormItem)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$message = Message
