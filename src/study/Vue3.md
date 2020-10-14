@@ -28,4 +28,7 @@
 - shallowRef / shallowReactive
 应用场景--一般情况下，使用ref和reactive即可，只有在需要监听的数据量比较大的时候，才使用shallowRef / shallowReactive
 
+- markRow
+使用markRow可以使对象数据永远不被监听，追踪
+
 #### Vue3.0--Custom Renderer API
