@@ -16,16 +16,26 @@
       label-width="70px"
       class="form"
     >
-      <el-form-item v-show="value==='name'" label="输入框" :prop="value">
+      <el-form-item v-show="value === 'name'" label="输入框" :prop="value">
         <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
-      <el-form-item v-show="value==='age'" label="输入框" :prop="value">
+      <el-form-item v-show="value === 'age'" label="输入框" :prop="value">
         <el-input v-model="ruleForm.age"></el-input>
       </el-form-item>
-      <el-form-item v-show="value==='tel'" label="输入框" :prop="value">
+      <el-form-item v-show="value === 'tel'" label="输入框" :prop="value">
         <el-input v-model="ruleForm.tel"></el-input>
       </el-form-item>
     </el-form>
+    <p v-for="(item, index) in testList" :key="index">
+      {{ item.icon }}
+    </p>
+    <el-button @click="changeArr" type="info" size="mini">
+      change
+    </el-button>
+    <p>{{ arr2 }}</p>
+    <el-button @click="changeArr2" type="info" size="mini">
+      change
+    </el-button>
   </div>
 </template>
 
@@ -36,8 +46,18 @@ export default {
   setup() {
     const { value, options } = useSelect()
     const { ruleForm, rules } = useForm()
+    const { testList, changeArr, arr2, changeArr2 } = useArr()
 
-    return { value, options, ruleForm, rules }
+    return {
+      value,
+      options,
+      ruleForm,
+      rules,
+      testList,
+      changeArr,
+      arr2,
+      changeArr2
+    }
   }
 }
 
@@ -81,6 +101,31 @@ function useForm() {
   }
 
   return { ruleForm, rules }
+}
+
+function useArr() {
+  const testList = reactive([
+    { icon: 'new' },
+    { icon: 'del' },
+    { icon: 'none' }
+  ])
+  const arr2 = reactive([1, 3, 5, 7])
+
+  function changeArr() {
+    testList.forEach((item) => {
+      item.icon = 'none'
+    })
+    console.log(testList)
+  }
+
+  function changeArr2() {
+    arr2.forEach((item, index, arr) => {
+      arr[index] = 20
+    })
+    console.log(arr2)
+  }
+
+  return { testList, changeArr, arr2, changeArr2 }
 }
 </script>
 

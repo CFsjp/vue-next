@@ -22,7 +22,7 @@ export function initAMap(callback) {
 
 export function createMap({
   id,
-  center = [104, 38],
+  center = [],
   zoom = 4,
   mapStyle = 'amap://styles/fresh'
 }) {

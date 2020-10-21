@@ -41,6 +41,15 @@
       <el-button @click="getMarkerArea(overlays[0])">
         面积
       </el-button>
+      <el-input
+        class="input"
+        v-model.number="zoom"
+        @blur="setZoom"
+        placeholder="请输入地图放大倍数"
+      />
+      <el-button @click="getCurrentPosition">
+        定位
+      </el-button>
     </div>
   </div>
 </template>
@@ -56,6 +65,7 @@ export default {
       marker: null,
       mouseTool: null,
       overlays: null,
+      zoom: 4,
       positions: {
         山东: [117.000923, 36.675807],
         河北: [115.48333, 38.03333],
@@ -118,15 +128,17 @@ export default {
           ],
           () => {
             map.addControl(new AMap.ToolBar({ liteStyle: true })) // 地图工具条插件，可以用来控制地图的缩放和平移
-            // map.addControl(new AMap.Scale()) // 地图比例尺插件
-            // map.addControl(new AMap.OverView({ isOpen: true })) // 地图鹰眼插件，默认在地图右下角显示缩略图
-            // map.addControl(new AMap.MapType({ showTraffic: false, showRoad: false })) // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
-            map.addControl(new AMap.Geolocation()) // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
+            map.addControl(new AMap.Scale()) // 地图比例尺插件
+            map.addControl(new AMap.OverView({ isOpen: true })) // 地图鹰眼插件，默认在地图右下角显示缩略图
+            map.addControl(
+              new AMap.MapType({ showTraffic: false, showRoad: false })
+            ) // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
             this.mouseTool = new AMap.MouseTool(map) // 工具实例
           }
         )
         this.map = map
       })
+      // this.addMarker()
     },
     addMarker() {
       // 创建一个 Marker 实例：
@@ -135,7 +147,8 @@ export default {
         title: '北京'
       })
       // 将创建的点标记添加到已有的地图实例：
-      this.marker.setMap(this.map)
+      // this.marker.setMap(this.map)
+      this.map.add(this.marker)
     },
     clearMarker() {
       if (this.marker) {
@@ -177,8 +190,6 @@ export default {
       this.map.off('mousemove')
     },
     console() {
-      // const info = this.overlays.map((i) => i.getOptions())
-      // const bound = this.overlays.map(i => i.getBounds())
       alert(this.overlays[0].getExtData())
     },
     getMarkerArea(marker) {
@@ -212,6 +223,27 @@ export default {
         layer = [new AMap.TileLayer({ detectRetina: true })]
       }
       this.map.setLayers(layer)
+    },
+    setZoom() {
+      this.map.setZoom(this.zoom)
+    },
+    getCurrentPosition() {
+      const that = this
+      AMap.plugin('AMap.Geolocation', function() {
+        const geolocation = new AMap.Geolocation({
+          buttonOffset: new AMap.Pixel(10, 50), // 定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+          zoomToAccuracy: true // 定位成功后是否自动调整地图视野到定位点
+        })
+        that.map.addControl(geolocation)
+        geolocation.getCurrentPosition(function(status, result) {
+          if (status === 'complete') {
+            that.$message.success('定位成功')
+          } else {
+            that.$message.error('定位失败')
+          }
+          console.log(result)
+        })
+      })
     }
   }
 }
@@ -228,5 +260,10 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.input {
+  margin-left: 11px;
+  width: 10rem;
 }
 </style>
