@@ -1,5 +1,5 @@
 // Vue 2.0 vue 如何实现 响应式原理
-
+// 明天好好看看
 // 函数劫持,数组方法劫持---这里使用继承，子可以使用父上的方法
 const oldArrayPrototype = Array.prototype
 const proto = Object.create(oldArrayPrototype)
