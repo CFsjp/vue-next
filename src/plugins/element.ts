@@ -18,7 +18,8 @@ import {
   Select,
   Option,
   Form,
-  FormItem
+  FormItem,
+  Card
 } from 'element-ui'
 
 Vue.use(Button)
@@ -31,6 +32,7 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(Form)
 Vue.use(FormItem)
+Vue.use(Card)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$message = Message

@@ -33,6 +33,11 @@ const routes: RouteConfig[] = [
     path: '/form',
     name: 'form',
     component: () => import('@/views/Form.vue')
+  },
+  {
+    path: '*',
+    name: '404',
+    component: () => import('@/views/404.vue')
   }
 ]
 
