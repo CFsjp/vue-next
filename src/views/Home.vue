@@ -1,28 +1,30 @@
 <template>
   <div class="home">
-    <h4>数组去重</h4>
-    <div>{{ arr }}</div>
-    <div>{{ arr2 }}</div>
-    <h1>加油，上进！</h1>
-    <el-autocomplete
-      v-model="address"
-      value-key="value"
-      :fetch-suggestions="querySearchAsync"
-      placeholder="请输入内容"
-      @select="(item) => handleSelect(item, '1')"
-    ></el-autocomplete>
-    <el-tooltip content="Bottom center" placement="bottom" effect="light">
-      <div slot="content">
-        <span>1.所选的表必须设有主键，并且是单字段主键</span>
-        <br />
-        <span>2.必须保证主键长度至少19位</span>
-      </div>
-      <el-button>Light</el-button>
-    </el-tooltip>
-    <h2>用于监听的num:{{ num }}</h2>
-    <button @click="add">
-      +
-    </button>
+    <div v-if="false">
+      <h4>数组去重</h4>
+      <div>{{ arr }}</div>
+      <div>{{ arr2 }}</div>
+      <h1>加油，上进！</h1>
+      <el-autocomplete
+        v-model="address"
+        value-key="value"
+        :fetch-suggestions="querySearchAsync"
+        placeholder="请输入内容"
+        @select="(item) => handleSelect(item, '1')"
+      ></el-autocomplete>
+      <el-tooltip content="Bottom center" placement="bottom" effect="light">
+        <div slot="content">
+          <span>1.所选的表必须设有主键，并且是单字段主键</span>
+          <br />
+          <span>2.必须保证主键长度至少19位</span>
+        </div>
+        <el-button>Light</el-button>
+      </el-tooltip>
+      <h2>用于监听的num:{{ num }}</h2>
+      <button @click="add">
+        +
+      </button>
+    </div>
   </div>
 </template>
 
@@ -218,6 +220,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .home {
+  width: 100%;
+  height: 100%;
   text-align: center;
+  background-image: url('../assets/imgs/like.jpg');
+  background-size: 100% 100%;
 }
 </style>

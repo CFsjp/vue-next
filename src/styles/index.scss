@@ -10,6 +10,10 @@ body,
   height: 100%;
 }
 
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
 /*---滚动条默认显示样式--*/
 ::-webkit-scrollbar-thumb {
   background-color: #018ee8;
