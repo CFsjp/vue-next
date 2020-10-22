@@ -35,6 +35,11 @@ const routes: RouteConfig[] = [
     component: () => import('@/views/Form.vue')
   },
   {
+    path: '/count',
+    name: 'count',
+    component: () => import('@/views/Count.vue')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('@/views/404.vue')

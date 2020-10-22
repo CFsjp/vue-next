@@ -50,6 +50,9 @@
       <el-button @click="getCurrentPosition">
         定位
       </el-button>
+      <el-button @click="getProvince">
+        省高亮
+      </el-button>
     </div>
   </div>
 </template>
@@ -65,7 +68,10 @@ export default {
       marker: null,
       mouseTool: null,
       overlays: null,
-      zoom: 4,
+      zoom: 5,
+      adCode: 130000,
+      depth: 2, // 中国
+      disProvince: null,
       positions: {
         山东: [117.000923, 36.675807],
         河北: [115.48333, 38.03333],
@@ -107,6 +113,9 @@ export default {
   mounted() {
     document.title = '高德地图'
     this.init()
+    // 初始化就显示点和省高亮
+    // this.addMarker()
+    // this.getProvince()
   },
   methods: {
     init() {
@@ -124,7 +133,7 @@ export default {
             'AMap.Scale',
             'AMap.OverView',
             'AMap.MapType',
-            'AMap.Geolocation'
+            'AMap.DistrictLayer'
           ],
           () => {
             map.addControl(new AMap.ToolBar({ liteStyle: true })) // 地图工具条插件，可以用来控制地图的缩放和平移
@@ -137,8 +146,9 @@ export default {
           }
         )
         this.map = map
+        this.addMarker()
+        this.getProvince()
       })
-      // this.addMarker()
     },
     addMarker() {
       // 创建一个 Marker 实例：
@@ -244,6 +254,39 @@ export default {
           console.log(result)
         })
       })
+    },
+    getProvince() {
+      const adCode = 130000
+      let depth = 0
+      // 颜色辅助方法
+      const colors = {}
+
+      depth = typeof depth === 'undefined' ? 2 : depth
+
+      this.disProvince && this.disProvince.setMap(null)
+
+      this.disProvince = new AMap.DistrictLayer.Province({
+        zIndex: 12,
+        adcode: [adCode],
+        depth,
+        styles: {
+          fill(properties) {
+            const adcode = properties.adcode
+
+            if (!colors[adcode]) {
+              const gb = Math.random() * 155 + 50
+              colors[adcode] = 'rgb(' + gb + ',' + gb + ',255)'
+            }
+
+            return colors[adcode]
+          },
+          'province-stroke': 'cornflowerblue',
+          'city-stroke': 'white', // 中国地级市边界
+          'county-stroke': 'rgba(255,255,255,0.5)' // 中国区县边界
+        }
+      })
+
+      this.disProvince.setMap(this.map)
     }
   }
 }

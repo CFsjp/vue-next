@@ -32,6 +32,8 @@ export function createMap({
         zoom, // 地图放大级别
         center,
         mapStyle,
+        pitch: 0,
+        viewMode: '3D',
         resizeEnable: true
       })
       resolve(map)
