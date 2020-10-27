@@ -67,7 +67,7 @@ export default {
       map: null,
       marker: null,
       mouseTool: null,
-      overlays: null,
+      overlays: [],
       zoom: 5,
       adCode: 130000,
       depth: 2, // 中国
@@ -113,9 +113,6 @@ export default {
   mounted() {
     document.title = '高德地图'
     this.init()
-    // 初始化就显示点和省高亮
-    // this.addMarker()
-    // this.getProvince()
   },
   methods: {
     init() {
@@ -154,7 +151,12 @@ export default {
       // 创建一个 Marker 实例：
       this.marker = new AMap.Marker({
         position: new AMap.LngLat(116.39, 39.9), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-        title: '北京'
+        title: '北京',
+        // 设置是否可以拖拽
+        draggable: true,
+        cursor: 'move',
+        // 设置拖拽效果
+        raiseOnDrag: true
       })
       // 将创建的点标记添加到已有的地图实例：
       // this.marker.setMap(this.map)
@@ -185,19 +187,35 @@ export default {
     },
     // 处理矢量图形
     handleMouseTool(type) {
-      const option = {
-        fillColor: '#00b0ff',
-        strokeColor: '#80d8ff'
-      }
-      this.mouseTool[type](option) // 添加矢量图形方法
-      this.map.on('mousemove', () => {
+      // const option = {
+      //   fillColor: '#00b0ff',
+      //   strokeColor: '#80d8ff'
+      // }
+      // this.mouseTool[type](option) // 添加矢量图形方法
+      // this.map.on('mouseup', () => {
+      //   this.overlays = this.map.getAllOverlays()
+      // })
+
+      this.mouseTool.on('draw', () => {
         this.overlays = this.map.getAllOverlays()
+        this.mouseTool.close()
       })
+
+      const draw = () => {
+        // 添加矢量图形方法
+        this.mouseTool[type]({
+          fillColor: '#00b0ff',
+          strokeColor: '#80d8ff'
+        })
+      }
+
+      draw()
     },
     clearMouseTool() {
-      this.map.remove(this.overlays)
-      this.overlays = []
-      this.map.off('mousemove')
+      // this.map.remove(this.overlays)
+      // this.overlays = []
+      this.mouseTool.close()
+      // this.map.off('mouseup')
     },
     console() {
       alert(this.overlays[0].getExtData())
@@ -256,7 +274,20 @@ export default {
       })
     },
     getProvince() {
-      const adCode = 130000
+      const provinceAdcode = [
+        420000,
+        130000,
+        140000,
+        210000,
+        110000,
+        430000,
+        460000,
+        310000,
+        500000,
+        350000
+      ]
+      const index = Math.floor(Math.random() * 10)
+      const adCode = provinceAdcode[index]
       let depth = 0
       // 颜色辅助方法
       const colors = {}
