@@ -7,6 +7,10 @@
     <el-button @click="changeCount(-1)">
       -
     </el-button>
+    <el-button @click="downExcel()">
+      down
+    </el-button>
+    <a href="./favicon.ico">1111</a>
   </div>
 </template>
 
@@ -16,7 +20,7 @@ import { ref, watch } from '@vue/composition-api'
 export default {
   setup(props, { root }) {
     const count = ref(root.$store.state.count)
-    const { changeCount } = useVuex(root)
+    const { changeCount, downExcel } = useVuex(root)
 
     watch(
       () => root.$store.state.count,
@@ -25,7 +29,7 @@ export default {
       }
     )
 
-    return { count, changeCount }
+    return { count, changeCount, downExcel }
   }
 }
 function useVuex(root) {
@@ -33,7 +37,10 @@ function useVuex(root) {
     root.$store.dispatch('asyncCount', num)
   }
 
-  return { changeCount }
+  function downExcel() {
+    window.open('./1.xlsx')
+  }
+  return { changeCount, downExcel }
 }
 </script>
 
