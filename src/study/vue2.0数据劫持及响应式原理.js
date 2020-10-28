@@ -47,3 +47,4 @@ function defineReactive(target, key, value) {
 function updateView() {
   console.log('更新视图')
 }
+
