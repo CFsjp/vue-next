@@ -19,7 +19,10 @@ import {
   Option,
   Form,
   FormItem,
-  Card
+  Card,
+  Cascader,
+  Table,
+  TableColumn
 } from 'element-ui'
 
 Vue.use(Button)
@@ -33,6 +36,9 @@ Vue.use(Option)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Card)
+Vue.use(Cascader)
+Vue.use(Table)
+Vue.use(TableColumn)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$message = Message
