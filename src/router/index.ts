@@ -37,7 +37,7 @@ const routes: RouteConfig[] = [
   {
     path: '/count',
     name: 'count',
-    component: () => import('@/views/Count.vue')
+    component: () => import('@/views/count/index.vue')
   },
   {
     path: '*',
