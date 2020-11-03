@@ -40,6 +40,11 @@ const routes: RouteConfig[] = [
     component: () => import('@/views/count/index.vue')
   },
   {
+    path: '/animation',
+    name: 'animation',
+    component: () => import('@/views/animation/index.vue')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('@/views/404.vue')
