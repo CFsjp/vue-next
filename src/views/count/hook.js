@@ -1,4 +1,11 @@
-import { reactive, ref, watch } from '@vue/composition-api'
+import {
+  onMounted,
+  reactive,
+  ref,
+  watch,
+  watchEffect,
+  getCurrentInstance
+} from '@vue/composition-api'
 
 export function useVuex(root) {
   const count = ref(root.$store.state.count)
@@ -192,4 +199,28 @@ export function useTable() {
   }
 
   return { tableData, deleteRow }
+}
+
+export function useApi() {
+  // const ctx = getCurrentInstance() // oop和composition混合使用时，可以使用这个方法获取到实例
+  const a = reactive([
+    { id: 1, name: '第一个' },
+    { id: 2, name: '第二个' }
+  ])
+  const b = [{ value: '待合并第一个' }, { value: '待合并第二个' }]
+
+  onMounted(() => {
+    assign()
+    // console.log(ctx)
+  })
+
+  watchEffect(() => {
+    console.log(a)
+  })
+
+  function assign() {
+    a.forEach((item, index) => Object.assign(item, b[index]))
+  }
+
+  return { a, b, assign }
 }

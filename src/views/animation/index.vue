@@ -3,7 +3,7 @@
     <h1>此页面是练习CSS3动画的页面</h1>
     <br />
     <h2>跑马灯</h2>
-    <span class="title">为了引起你的注意，我真是煞费苦心</span>
+    <span ref="highSpan" class="title">为了引起你的注意，我真是煞费苦心</span>
     <marquee width="300" bgcolor="#875479" behavior="scroll">
       我单方向循环滚动
     </marquee>
@@ -22,12 +22,19 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api'
+import { onMounted, ref } from '@vue/composition-api'
+
 export default {
   setup() {
     const flag = ref(false)
+    const highSpan = ref(null)
 
-    return { flag }
+    onMounted(() => {
+      console.log(highSpan.value)
+      highSpan.value.innerText = '111'
+    })
+
+    return { flag, highSpan }
   }
 }
 </script>
