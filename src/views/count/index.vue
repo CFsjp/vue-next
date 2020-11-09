@@ -72,11 +72,18 @@
         </el-table-column>
       </el-table>
     </div>
+    <div>
+      <h2>{{ a }}</h2>
+      <h2>{{ b }}</h2>
+      <el-button @click="assign">
+        合并
+      </el-button>
+    </div>
   </div>
 </template>
 
 <script>
-import { useVuex, useQuerySearch, useCascader, useTable } from './hook'
+import { useVuex, useQuerySearch, useCascader, useTable, useApi } from './hook'
 
 export default {
   setup(props, { root }) {
@@ -97,6 +104,7 @@ export default {
     } = useCascader()
 
     const { tableData, deleteRow } = useTable()
+    const { a, b, assign } = useApi()
 
     return {
       count,
@@ -112,7 +120,10 @@ export default {
       cascaderChange,
       cascaderExpandChange,
       tableData,
-      deleteRow
+      deleteRow,
+      a,
+      b,
+      assign
     }
   }
 }
