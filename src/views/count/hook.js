@@ -17,6 +17,10 @@ export function useVuex(root) {
     }
   )
 
+  watchEffect(() => {
+    console.log(count.value)
+  })
+
   function changeCount(num) {
     root.$store.dispatch('asyncCount', num)
   }
