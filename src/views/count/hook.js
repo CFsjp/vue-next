@@ -18,7 +18,7 @@ export function useVuex(root) {
   )
 
   watchEffect(() => {
-    console.log(count.value)
+    // console.log(count.value)
   })
 
   function changeCount(num) {
@@ -58,11 +58,11 @@ export function useQuerySearch() {
   }
 
   function handleSelect(item) {
-    console.log(item)
+    // console.log(item)
   }
 
   function handleIconClick() {
-    console.log(1111111111111)
+    // console.log(1111111111111)
   }
 
   return { restaurants, state, querySearch, handleSelect, handleIconClick }
@@ -129,10 +129,10 @@ export function useCascader() {
   ]
 
   function cascaderChange(data) {
-    console.log('1:', data)
+    // console.log('1:', data)
   }
   function cascaderExpandChange(data) {
-    console.log('2:', data)
+    // console.log('2:', data)
   }
 
   return { cascadeProps, options, cascaderChange, cascaderExpandChange }
@@ -219,7 +219,7 @@ export function useApi() {
   })
 
   watchEffect(() => {
-    console.log(a)
+    // console.log(a)
   })
 
   function assign() {
