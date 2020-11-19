@@ -45,6 +45,11 @@ const routes: RouteConfig[] = [
     component: () => import('@/views/animation/index.vue')
   },
   {
+    path: '/grid',
+    name: 'grid',
+    component: () => import('@/views/display-grid/index.vue')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('@/views/404.vue')

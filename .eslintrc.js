@@ -31,6 +31,7 @@ module.exports = {
     'vue/html-self-closing': 0, // 标签是否自闭和，这里允许不自闭和，即保留<div></div>
     'vue/name-property-casing': ['error', 'PascalCase'],
     'vue/require-valid-default-prop': 0, // ignore props must be a function,
+    'vue/singleline-html-element-content-newline': 0,
     'accessor-pairs': 2, // 强制 getter 和 setter 在对象中成对出现
     'arrow-spacing': 2, // 强制箭头函数的箭头前后使用一致的空格
     'block-spacing': [2, 'always'], // 禁止或强制在代码块中开括号前和闭括号后有空格
