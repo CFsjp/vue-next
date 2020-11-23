@@ -32,10 +32,36 @@
     <el-button @click="changeArr" type="info" size="mini">
       change
     </el-button>
-    <p>{{ arr2 }}</p>
+    <p class="demo">{{ arr2 }}</p>
     <el-button @click="changeArr2" type="info" size="mini">
       change
     </el-button>
+    <div class="before">
+      <h1>Before</h1>
+      <p>Animate/transition box-shadow 可以使用box-shadow属性来实现盒子阴影效果，但重绘消耗较多</p>
+    </div>
+    <hr />
+    <div class="after">
+      <h1>After</h1>
+      <p>通过修改伪元素的透明度来实现同样的效果,没有重绘消耗</p>
+    </div>
+    <ul class="breadcrumb">
+      <li><a href="#">Home</a>
+      </li>
+      <li><a href="#">Pictures</a>
+      </li>
+      <li><a href="#">Summer 15</a>
+      </li>
+      <li>Italy</li>
+    </ul>
+    <div>
+      <h1>Typing Animation</h1>
+      <p class="tagline">
+        <span class="tagline-skill">
+          <span class="tagline-skill_inner">webdesign</span>
+        </span>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -132,5 +158,83 @@ function useArr() {
 <style lang="scss" scoped>
 .form {
   width: 217px;
+}
+
+.before {
+  padding: 1em;
+  background-color: #fff;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+.before:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+.after {
+  position: relative;
+  padding: 1em;
+  background-color: #fff;
+}
+.after:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  will-change: opacity;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+.after:hover:before {
+  opacity: 1;
+}
+
+ul.breadcrumb {
+    padding: 8px 16px;
+    list-style: none;
+    background-color: #eee;
+}
+ul.breadcrumb li {
+    display: inline;
+}
+ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+}
+ul.breadcrumb li a {
+    color: green;
+}
+
+// .tagline-skill_inner:after {
+//     content: "";
+//     position: absolute;
+//     top: -1px;
+//     right: 0;
+//     bottom: -2px;
+//     left: 0;
+//     border-left: 1px solid #fff;
+//     background-color: #2a2a28;
+//     -webkit-animation: animatetoright 1s steps(10) infinite alternate;
+//     animation: animatetoright 1s steps(10) infinite alternate;
+// }
+
+.demo {
+  // transition： CSS属性，花费时间，效果曲线(默认ease)，延迟时间(默认0)
+  // transition: all .5s;
+  width: 100px;
+  height: 100px;
+  transition: all 2s;
+  background-color: #E6A23C;
+  display: table-cell;
+  vertical-align: middle;
+
+  &:hover {
+    width: 200px;
+    background-color: #409EFF;
+  }
 }
 </style>
