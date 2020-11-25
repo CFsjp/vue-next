@@ -13,8 +13,8 @@
  */
 
 function quickSort(arr) {
-  if (arr.length === 0) {
-    return [] // 返回空数组
+  if (arr.length < 2) {
+    return arr // 返回原数组
   }
   const cIndex = Math.floor(arr.length / 2) // 向下取整
   const c = arr.splice(cIndex, 1) // 取得arr数组的中间数
@@ -33,4 +33,8 @@ function quickSort(arr) {
   return quickSort(l).concat(c, quickSort(r))
 }
 
-console.log(quickSort([1, 5, 4, 3, 2]))
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  11, 12, 13, 15, 16, 17, 19, 20, 35, 40, 50, 55, 60, 70, 80, 100]
+
+console.log(quickSort(arr))
