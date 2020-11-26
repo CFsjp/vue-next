@@ -6,6 +6,7 @@ import {
   watchEffect,
   getCurrentInstance
 } from '@vue/composition-api'
+import { getTest } from '@/api/app.ts'
 
 export function useVuex(root) {
   const count = ref(root.$store.state.count)
@@ -213,9 +214,12 @@ export function useApi() {
   ])
   const b = [{ value: '待合并第一个' }, { value: '待合并第二个' }]
 
+  let res = reactive([])
+
   onMounted(() => {
     assign()
     // console.log(ctx)
+    getInfo()
   })
 
   watchEffect(() => {
@@ -224,6 +228,11 @@ export function useApi() {
 
   function assign() {
     a.forEach((item, index) => Object.assign(item, b[index]))
+  }
+
+  async function getInfo() {
+    res = await getTest()
+    console.log(res)
   }
 
   return { a, b, assign }

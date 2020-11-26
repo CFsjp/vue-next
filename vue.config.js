@@ -30,13 +30,21 @@ module.exports = {
     open: true, // 自动打开网页
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target: `/api`,
+        target: process.env.VUE_APP_BASE_URL,
         changeOrigin: true,
         ws: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       }
+      // '/api': {
+      //   target: `http://localhost:3000`,
+      //   changeOrigin: true,
+      //   ws: true,
+      //   pathRewrite: {
+      //     '^/api': ''
+      //   }
+      // }
     }
   },
 
