@@ -5,7 +5,7 @@ export function deepClone(target: any) {
   }
 
   const result: any = target.constructor === Array ? [] : {}
-  Object.keys(target).forEach((key) => {
+  Object.keys(target).forEach(key => {
     if (target[key] && typeof target[key] === 'object') {
       result[key] = deepClone(target[key])
     } else {
@@ -16,11 +16,10 @@ export function deepClone(target: any) {
 }
 
 // // 防抖and节流
-// export function debounce(fn: Function, delay?: number) {
-//   delay = delay || 500
+// export function debounce(fn: Function, delay: number = 500) {
 //   let timer: number | null | undefined
-//   return function() {
-//     const ctx = this
+//   return () => {
+//     const ctx = this // 改变this指向为调用debounce所指的对象
 //     if (timer) {
 //       clearTimeout(timer)
 //     }
@@ -32,8 +31,7 @@ export function deepClone(target: any) {
 // }
 
 // // 节流
-// export function throttle(fn: Function, delay: number) {
-//   delay = delay || 500
+// export function throttle(fn: Function, delay: number = 1000) {
 //   let canRun = true // 通过闭包保存一个标记
 //   return function() {
 //     const ctx = this

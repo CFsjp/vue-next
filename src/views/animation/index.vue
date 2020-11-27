@@ -18,24 +18,52 @@
         文字显示
       </div>
     </transition>
+    <h2>{{ x }}, {{ y }}</h2>
   </div>
 </template>
 
 <script>
-import { onMounted, ref } from '@vue/composition-api'
+import { onMounted, ref, onUnmounted } from '@vue/composition-api'
+import { debounce, throttle } from '@/study/源码实现/2.防抖节流'
 
 export default {
   setup() {
     const flag = ref(false)
     const highSpan = ref(null)
+    const { x, y } = useMousePosition()
 
     onMounted(() => {
-      console.log(highSpan.value)
       highSpan.value.innerText = '111'
     })
 
-    return { flag, highSpan }
+    return { flag, highSpan, x, y }
   }
+}
+function useMousePosition() {
+  const x = ref(0)
+  const y = ref(0)
+
+  function update(e) {
+    x.value = e.pageX
+    y.value = e.pageY
+  }
+
+  function log() {
+    console.log('111111111')
+    // console.log(`x：${e.pageX}，y：${e.pageY}`)
+  }
+
+  onMounted(() => {
+    window.addEventListener('mousemove', throttle(log, 1000))
+    // window.addEventListener('mousemove', update)
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('mousemove', throttle(log, 1000))
+    // window.removeEventListener('mousemove', update)
+  })
+
+  return { x, y }
 }
 </script>
 
@@ -113,9 +141,8 @@ export default {
     #3498db
   );
   color: transparent;
-  -webkit-background-clip: text;
+  background-clip: text;
   background-size: 200% 100%;
-  -webkit-animation: slide 2s infinite linear;
   animation: slide 5s infinite linear;
   font-size: 40px;
 }
