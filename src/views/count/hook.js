@@ -13,7 +13,7 @@ export function useVuex(root) {
 
   watch(
     () => root.$store.state.count,
-    (newVal) => {
+    newVal => {
       count.value = newVal
     }
   )
@@ -53,7 +53,7 @@ export function useQuerySearch() {
     cb(results)
   }
   function createFilter(queryString) {
-    return (data) => {
+    return data => {
       return data.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
     }
   }
@@ -213,13 +213,14 @@ export function useApi() {
     { id: 2, name: '第二个' }
   ])
   const b = [{ value: '待合并第一个' }, { value: '待合并第二个' }]
+  const testNum = ref(null)
 
   let res = reactive([])
 
   onMounted(() => {
     assign()
     // console.log(ctx)
-    getInfo()
+    // getInfo()
   })
 
   watchEffect(() => {
@@ -235,5 +236,5 @@ export function useApi() {
     console.log(res)
   }
 
-  return { a, b, assign }
+  return { a, b, assign, testNum }
 }

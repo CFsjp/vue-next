@@ -50,6 +50,11 @@ const routes: RouteConfig[] = [
     component: () => import('@/views/display-grid/index.vue')
   },
   {
+    path: '/selectTree',
+    name: 'selectTree',
+    component: () => import('@/views/select.vue')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('@/views/404.vue')

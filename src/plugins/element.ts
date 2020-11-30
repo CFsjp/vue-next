@@ -22,7 +22,8 @@ import {
   Card,
   Cascader,
   Table,
-  TableColumn
+  TableColumn,
+  Tree
 } from 'element-ui'
 
 Vue.use(Button)
@@ -39,6 +40,7 @@ Vue.use(Card)
 Vue.use(Cascader)
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(Tree)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$message = Message

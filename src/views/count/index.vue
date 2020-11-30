@@ -79,6 +79,15 @@
         合并
       </el-button>
     </div>
+    <div>
+      <el-input
+        type="number"
+        size="small"
+        width="50"
+        v-model="testNum"
+        placeholder="请输入数字"
+      />
+    </div>
   </div>
 </template>
 
@@ -105,7 +114,7 @@ export default {
     } = useCascader()
 
     const { tableData, deleteRow } = useTable()
-    const { a, b, assign } = useApi()
+    const { a, b, assign, testNum } = useApi()
 
     return {
       count,
@@ -124,7 +133,8 @@ export default {
       deleteRow,
       a,
       b,
-      assign
+      assign,
+      testNum
     }
   }
 }
