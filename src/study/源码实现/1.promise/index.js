@@ -63,8 +63,8 @@ class Mypromise {
     rejectCallback =
       typeof rejectCallback !== 'function'
         ? err => {
-            throw err
-          }
+          throw err
+        }
         : rejectCallback
     // 为了保持链式调用  继续返回promise
     return new Mypromise((resolve, reject) => {
@@ -106,7 +106,7 @@ class Mypromise {
       for (let i = 0; i < promiseArr.length; i++) {
         promiseArr[i].then(
           res => {
-            // 这里不能直接push数组  因为要控制顺序一一对应(感谢评论区指正)
+            // 这里不能直接push数组  因为要控制顺序一一对应
             result[i] = res
             count++
             // 只有全部的promise执行成功之后才resolve出去
