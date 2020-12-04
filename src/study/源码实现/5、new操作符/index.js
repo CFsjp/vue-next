@@ -1,5 +1,11 @@
 /**
  * new操作符
+ * 
+ * new 到底干了什么？
+ * 创建一个空的对象{}
+ * 链接该对象到另一个对象
+ * 将步骤1新创建的对象作为this的上下文
+ * 如果该函数没有返回对象，则返回this
  */
 
 // 1、new 用法是什么？
@@ -28,7 +34,7 @@ function muNew(fn, ...args) {
   let obj = {}
 
   // 2、改变指向，完成继承
-  obj = Object.create(fn.prototype)
+  obj.__proto__ = Object.create(fn.prototype)
 
   // 3、改变构造函数this指向为实例对象
   const result = fn.call(obj, ...args)

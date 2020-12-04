@@ -11,14 +11,8 @@
       @clear="clear"
       ref="selectTree"
     /> -->
-    <el-select
-      v-model="mineStatus"
-      placeholder="请选择"
-      multiple
-      collapse-tags
-      @change="selectChange"
-    >
-      <el-option :value="mineStatusValue" style="height: auto">
+    <el-select v-model="mineStatus" placeholder="请选择" multiple collapse-tags>
+      <el-option style="height: auto">
         <!-- option展开高度太小，把height设置为auto就好啦 -->
         <el-tree
           :data="data"
@@ -27,7 +21,6 @@
           ref="tree"
           highlight-current
           :props="defaultProps"
-          @check-change="handleCheckChange"
         ></el-tree>
       </el-option>
     </el-select>
@@ -35,41 +28,12 @@
 </template>
 
 <script>
-// import selectTree from './components/tree'
+import '@/study/源码实现/5、new操作符/new'
+import '@/study/源码实现/4.call、apply、bind实现/test'
 
 export default {
-  // components: { selectTree },
   data() {
     return {
-      // tree: [
-      //   // 表单数据树的数据的数组
-      //   {
-      //     name: '一级 1',
-      //     value: '520',
-      //     children: [
-      //       {
-      //         name: '二级 1-1',
-      //         value: '520',
-      //         children: [
-      //           {
-      //             name: '三级 1-1-1',
-      //             value: '520'
-      //           },
-      //           {
-      //             name: '三级 1-1-2',
-      //             value: '520'
-      //           }
-      //         ]
-      //       }
-      //     ]
-      //   }
-      // ],
-      // treeValue: '',
-      // defaultProps: {
-      //   children: 'children',
-      //   label: 'name',
-      //   value: 'bizid'
-      // },
       mineStatus: '',
       mineStatusValue: [],
       data: [
