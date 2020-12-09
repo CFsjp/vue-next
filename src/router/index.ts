@@ -55,6 +55,11 @@ const routes: RouteConfig[] = [
     component: () => import('@/views/select.vue')
   },
   {
+    path: '/echarts',
+    name: 'echarts',
+    component: () => import('@/views/echarts-dome.vue')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('@/views/404.vue')

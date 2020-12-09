@@ -1,42 +1,17 @@
-// 计算几个月后的时间
+// 计算几个月（前）后的时间
 export function useFutureTime(num) {
-  const timestamp = new Date().getTime()
-  const len = timestamp.toString().length
+  const date = new Date()
+  let year = date.getFullYear()
+  let month = date.getMonth()
 
-  let date = new Date(timestamp)
-  if (len === 10) {
-    date = date * 1000
+  month += num
+
+  if (month > 12) {
+    year += parseInt(month / 12)
+    month = month % 12
+    date.setFullYear(year)
   }
+  date.setMonth(month)
 
-  const D =
-    date
-      .getDate()
-      .toString()
-      .padStart(2, '0') + ' '
-  const h =
-    date
-      .getHours()
-      .toString()
-      .padStart(2, '0') + ':'
-  const m =
-    date
-      .getMinutes()
-      .toString()
-      .padStart(2, '0') + ':'
-  const s = date
-    .getSeconds()
-    .toString()
-    .padStart(2, '0')
-  let Y = date.getFullYear()
-  let M = date.getMonth() + 1
-
-  M += num
-  if (M > 12) {
-    Y = parseInt(M / 12) + Y
-    M = M % 12
-  }
-  M = M.toString().padStart(2, '0') + '-'
-  Y += '-'
-  const time = Y + M + D + h + m + s
-  return { time }
+  return date
 }

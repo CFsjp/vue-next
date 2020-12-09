@@ -2,20 +2,6 @@ import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { DEVHOST, PROHOST } from '@/config/index'
 import { Message } from 'element-ui'
 
-declare type Methods =
-  | 'GET'
-  | 'OPTIONS'
-  | 'HEAD'
-  | 'POST'
-  | 'PUT'
-  | 'DELETE'
-  | 'TRACE'
-  | 'CONNECT'
-declare interface Datas {
-  method?: Methods
-  [key: string]: any
-}
-
 const baseUrl = process.env.NODE_ENV === 'development' ? DEVHOST : PROHOST
 class HttpRequest {
   public queue: any
@@ -130,7 +116,7 @@ export const post = (url: string, params?: any) => {
   return serve.request({
     url,
     params,
-    method: 'post'
+    method: 'POST'
   })
 }
 
@@ -138,6 +124,39 @@ export const get = (url: string, params?: any) => {
   return serve.request({
     url,
     params,
-    method: 'get'
+    method: 'GET'
   })
+}
+
+export const download = (url: string, filename: string, params?: any) => {
+  return serve
+    .request({
+      url,
+      params,
+      method: 'POST',
+      responseType: 'blob'
+    })
+    .then(res => {
+      const content = res.data
+      const blob = new Blob([content])
+      if ('download' in document.createElement('a')) {
+        const elink = document.createElement('a')
+        elink.download = filename
+        elink.style.display = 'none'
+        elink.href = URL.createObjectURL(blob)
+        document.body.appendChild(elink)
+        elink.click()
+        URL.revokeObjectURL(elink.href)
+        document.body.removeChild(elink)
+      } else {
+        navigator.msSaveBlob(blob, filename)
+      }
+    })
+    .catch(r => {
+      console.error(r)
+      Message({
+        message: '下载失败',
+        type: 'error'
+      })
+    })
 }

@@ -9,9 +9,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/echarts": "^4.9.2",
     "@vue/composition-api": "^1.0.0-beta.6",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "echarts": "^5.0.0",
     "element-ui": "^2.13.2",
     "vue": "^2.6.11",
     "vue-amap": "^0.5.10",

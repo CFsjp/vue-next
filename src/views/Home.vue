@@ -10,7 +10,7 @@
         value-key="value"
         :fetch-suggestions="querySearchAsync"
         placeholder="请输入内容"
-        @select="(item) => handleSelect(item, '1')"
+        @select="item => handleSelect(item, '1')"
       ></el-autocomplete>
       <el-tooltip content="Bottom center" placement="bottom" effect="light">
         <div slot="content">
@@ -25,6 +25,7 @@
         +
       </button>
     </div>
+    <h1>你好！首页</h1>
   </div>
 </template>
 
@@ -205,9 +206,9 @@ export default defineComponent({
     },
     test() {
       const arr = [[{ id: 1 }]]
-      arr.forEach((el) => {
+      arr.forEach(el => {
         // eslint-disable-next-line no-unused-vars
-        el.forEach((item) => {
+        el.forEach(item => {
           const msg = { id: 1, name: 'zs' }
           item = msg
         })
@@ -223,7 +224,5 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   text-align: center;
-  background-image: url('../assets/imgs/like.jpg');
-  background-size: 100% 100%;
 }
 </style>
