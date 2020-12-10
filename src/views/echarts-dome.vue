@@ -1,18 +1,20 @@
 <template>
   <div class="echarts-wrap">
+    <h1>echart</h1>
     <div class="pie-echart" ref="pieEchart" />
     <div id="main" style="width: 600px;height:400px;" ref="charts"></div>
   </div>
 </template>
 
 <script>
-// import { useEcharts } from './hooks/echarts-dome.js'
+import { useEcharts } from './hooks/echarts-dome.js'
 
 export default {
-  // setup() {
-  //   const { pieEchart, renderEchart } = useEcharts()
-  //   return { pieEchart, renderEchart }
-  // }
+  setup() {
+    const { pieEchart, renderEchart } = useEcharts()
+
+    return { pieEchart, renderEchart }
+  }
 }
 </script>
 
