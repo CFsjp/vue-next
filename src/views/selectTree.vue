@@ -30,6 +30,7 @@
 <script>
 import '@/study/源码实现/5、new操作符/new'
 import '@/study/源码实现/4.call、apply、bind实现/test'
+import '@/study/源码实现/6、instanceOf/index'
 
 export default {
   data() {

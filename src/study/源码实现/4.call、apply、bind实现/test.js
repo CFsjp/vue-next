@@ -46,16 +46,20 @@ fn.myApply(obj, ['我是lihua', '18'])
 // const newFn = fn.myBind(obj, '我是lihua', '18')
 // newFn()
 
-// Function.prototype.myBind = (ctx = window, ...args) => {
-//   //  类型判断
-//   if (typeof this !== 'function') {
-//     throw new TypeError('must be a function')
-//   }
-//   const key = Symbol()
-//   ctx[key] = this
-//   return () => {
-//     const result = ctx[key](...args)
-//     delete ctx[key]
-//     return result
-//   }
-// }
+Function.prototype.myBind = function(context, ...args) {
+  if (typeof this !== 'function') {
+    throw new Error('Function.prototype.bind - what is trying to be bound is not callable')
+  }
+
+  const self = this
+
+  let fbound = function() {
+    self.apply(this instanceof self
+      ? this
+      : context, args.concat(Array.prototype.slice.call(arguments)))
+  }
+
+  fbound = Object.create(this.prototype)
+
+  return fbound
+}

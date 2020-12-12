@@ -52,7 +52,7 @@ const routes: RouteConfig[] = [
   {
     path: '/selectTree',
     name: 'selectTree',
-    component: () => import('@/views/select.vue')
+    component: () => import('@/views/selectTree.vue')
   },
   {
     path: '*',

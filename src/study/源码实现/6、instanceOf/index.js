@@ -9,22 +9,19 @@
 // while(true) 一直遍历 直到原型链的尽头 null 都没有相等就说明不存在 返回 false
 
 function myInstanceof(left, right) {
-  let leftProp = left.__proto__
-  const rightProp = right.prototype
-  // 一直会执行循环  直到函数return
+  if (typeof left !== 'object' || left === null) return false
+  // getPrototypeOf 是 Object 对象自带的一个方法，能够拿到参数的原型对象
+  let proto = Object.getPrototypeOf(left)
+
   while (true) {
-    // 遍历到了原型链最顶层
-    if (leftProp === null) {
-      return false
-    }
-    if (leftProp === rightProp) {
-      return true
-    } else {
-      // 遍历赋值__proto__做对比
-      leftProp = leftProp.__proto__
-    }
+    // 查到尽头，还没找到
+    if (proto === null) return false
+
+    // 找到相同的原型对象
+    if (proto === right.prototype) return true
+    proto = Object.getPrototypeOf(left)
   }
 }
 // 测试一下
-const a = []
+const a = [1, 2, 3, 4]
 console.log(myInstanceof(a, Array))
