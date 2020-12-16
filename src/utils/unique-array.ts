@@ -29,8 +29,8 @@ export function uniqueArrayByItem(arr: Array<any>) {
    * ]
    */
 
-  const tem = [...new Set(arr.map((c) => JSON.stringify(c)))]
-  return tem.map((el) => JSON.parse(el))
+  const tem = [...new Set(arr.map(c => JSON.stringify(c)))]
+  return tem.map(el => JSON.parse(el))
 
   // let res:any = {}
   // arr.forEach((item) => {
@@ -40,29 +40,39 @@ export function uniqueArrayByItem(arr: Array<any>) {
   // return Object.values(res)
 }
 
-export function uniqueArrayByKey(arr: Array<any>, key: number) {
-  /**
-   * 以数组对象中某1个键值对为条件去重
-   * @param arr：要去重的数组 @param key：以第几个key为条件去重
-   * const a = [
-   *  { id: 1, name: '何' },
-   *  { id: 2, name: '何' },
-   *  { id: 3, name: '何' },
-   *  { id: 1, name: '王' },
-   *  { id: 2, name: '王' },
-   * ]
-   *
-   * 结果：[
-   *  { id: 1, name: '何' },
-   *  { id: 1, name: '王' }
-   * ]
-   */
+// export function uniqueArrayByKey(arr: Array<any>, key: number) {
+//   /**
+//    * 以数组对象中某1个键值对为条件去重
+//    * @param arr：要去重的数组 @param key：以第几个key为条件去重
+//    * const a = [
+//    *  { id: 1, name: '何' },
+//    *  { id: 2, name: '何' },
+//    *  { id: 3, name: '何' },
+//    *  { id: 1, name: '王' },
+//    *  { id: 2, name: '王' },
+//    * ]
+//    *
+//    * 结果：[
+//    *  { id: 1, name: '何' },
+//    *  { id: 1, name: '王' }
+//    * ]
+//    */
 
-  const obj: any = {}
-  const result = arr.reduce((cur, next) => {
-    obj[next[Object.keys(next)[key]]]
-      ? ''
-      : (obj[next[Object.keys(next)[key]]] = true && cur.push(next))
-    return cur
-  }, [])
+//   const obj: any = {}
+//   const result = arr.reduce((cur, next) => {
+//     obj[next[Object.keys(next)[key]]]
+//       ? ''
+//       : (obj[next[Object.keys(next)[key]]] = true && cur.push(next))
+//     return cur
+//   }, [])
+// }
+
+export function uniqueArrayByKey(arr: Array<any>, key: string) {
+  let map = new Map()
+  arr.forEach((item, index) => {
+    if (!map.has(item[key])) {
+      map.set(item[key], item)
+    }
+  })
+  return [...map.values()]
 }

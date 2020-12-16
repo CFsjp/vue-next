@@ -11,6 +11,10 @@ import { getTest } from '@/api/app.ts'
 export function useVuex(root) {
   const count = ref(root.$store.state.count)
 
+  onMounted(() => {
+    console.log(root.$refs.input)
+  })
+
   watch(
     () => root.$store.state.count,
     newVal => {
