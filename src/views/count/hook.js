@@ -3,10 +3,10 @@ import {
   reactive,
   ref,
   watch,
-  watchEffect,
-  getCurrentInstance
+  watchEffect
+  // getCurrentInstance
 } from '@vue/composition-api'
-import { getTest } from '@/api/app.ts'
+// import { getTest } from '@/api/app.ts'
 
 export function useVuex(root) {
   const count = ref(root.$store.state.count)
@@ -58,7 +58,7 @@ export function useQuerySearch() {
     }
   }
 
-  function handleSelect(item) {
+  function handleSelect() {
     // console.log(item)
   }
 
@@ -129,10 +129,10 @@ export function useCascader() {
     }
   ]
 
-  function cascaderChange(data) {
+  function cascaderChange() {
     // console.log('1:', data)
   }
-  function cascaderExpandChange(data) {
+  function cascaderExpandChange() {
     // console.log('2:', data)
   }
 
@@ -215,7 +215,7 @@ export function useApi() {
   const b = [{ value: '待合并第一个' }, { value: '待合并第二个' }]
   const testNum = ref(null)
 
-  let res = reactive([])
+  // const res = reactive([])
 
   onMounted(() => {
     assign()
@@ -231,10 +231,10 @@ export function useApi() {
     a.forEach((item, index) => Object.assign(item, b[index]))
   }
 
-  async function getInfo() {
-    res = await getTest()
-    console.log(res)
-  }
+  // async function getInfo() {
+  //   res = await getTest()
+  //   console.log(res)
+  // }
 
   return { a, b, assign, testNum }
 }
