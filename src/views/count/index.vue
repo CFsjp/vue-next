@@ -36,6 +36,8 @@
         :filterable="true"
         @change="cascaderChange"
         @expand-change="cascaderExpandChange"
+        @blur="blur"
+        @visible-change="visibleChange"
       ></el-cascader>
     </div>
     <div>
@@ -86,6 +88,8 @@
         width="50"
         v-model="testNum"
         placeholder="请输入数字"
+        ref="input"
+        @keyup="testNum = checkInput(testNum)"
       />
     </div>
   </div>
