@@ -23,7 +23,8 @@ import {
   Cascader,
   Table,
   TableColumn,
-  Tree
+  Tree,
+  TimePicker
 } from 'element-ui'
 
 Vue.use(Button)
@@ -41,6 +42,7 @@ Vue.use(Cascader)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Tree)
+Vue.use(TimePicker)
 
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$message = Message

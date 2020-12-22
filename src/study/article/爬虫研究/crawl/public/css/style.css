@@ -1,8 +1,0 @@
-* {margin:0;padding:0;}
-ul,ol {list-style: none;}
-.container {
-    font-size: 0;
-}
-.nav, .main {
-    display: inline-block;
-}

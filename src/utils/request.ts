@@ -53,8 +53,6 @@ class HttpRequest {
             },
             { header: res.headers }
           )
-        } else {
-          return { data, status }
         }
         return { data, status }
       },
@@ -65,33 +63,27 @@ class HttpRequest {
         if (error && error.request) {
           const status = error.request.status
           switch (status) {
-            case 401:
-              Message({
-                message: '接口配置未经授权！',
-                type: 'error',
-                duration: 3000
-              })
+            case 400: Message.error('请求错误')
               break
-            case 404:
-              Message({
-                message: '服务端接口未找到！',
-                type: 'error',
-                duration: 3000
-              })
+            case 401: Message.error('接口配置未经授权！')
               break
-            case 415:
-              Message({
-                message: 'HTTP协议不匹配，请确认！',
-                type: 'error',
-                duration: 3000
-              })
+            case 403: Message.error('拒绝访问')
               break
-            case 500:
-              Message({
-                message: '服务器未启动！',
-                type: 'error',
-                duration: 3000
-              })
+            case 404: Message.error('请求地址出错')
+              break
+            case 408: Message.error('请求超时')
+              break
+            case 500: Message.error('服务器内部错误')
+              break
+            case 501: Message.error('服务未实现')
+              break
+            case 502: Message.error('网关错误')
+              break
+            case 503: Message.error('服务不可用')
+              break
+            case 504: Message.error('网关超时')
+              break
+            case 505: Message.error('HTTP版本不受支持')
               break
             default:
               Message({ message: '未知错误！', type: 'error', duration: 3000 })
