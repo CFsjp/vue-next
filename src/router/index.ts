@@ -10,11 +10,6 @@ const routes: RouteConfig[] = [
     component: () => import('@/views/Home.vue')
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/views/About.vue')
-  },
-  {
     path: '/api',
     name: 'CompositionApi',
     component: () => import('@/views/composition-api.vue')
@@ -25,39 +20,9 @@ const routes: RouteConfig[] = [
     component: () => import('@/views/amap.vue')
   },
   {
-    path: '/upload',
-    name: 'upload',
-    component: () => import('@/components/upload.vue')
-  },
-  {
-    path: '/form',
-    name: 'form',
-    component: () => import('@/views/Form.vue')
-  },
-  {
-    path: '/count',
-    name: 'count',
-    component: () => import('@/views/count/index.vue')
-  },
-  {
     path: '/animation',
     name: 'animation',
     component: () => import('@/views/animation/index.vue')
-  },
-  {
-    path: '/grid',
-    name: 'grid',
-    component: () => import('@/views/display-grid/index.vue')
-  },
-  {
-    path: '/selectTree',
-    name: 'selectTree',
-    component: () => import('@/views/selectTree.vue')
-  },
-  {
-    path: '/echarts',
-    name: 'echarts',
-    component: () => import('@/views/echarts-dome.vue')
   },
   {
     path: '*',

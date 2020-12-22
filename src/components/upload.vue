@@ -26,8 +26,6 @@
   </div>
 </template>
 
-// el-upload 相应函数钩子
-
 <script>
 export default {
   data() {
@@ -96,10 +94,10 @@ export default {
           data,
           method: 'post'
         }).then(
-          (res) => {
+          res => {
             console.log(res)
           },
-          (err) => {
+          err => {
             console.log(err)
           }
         )
