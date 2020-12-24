@@ -24,7 +24,6 @@
 
 <script>
 import { onMounted, ref, onUnmounted } from '@vue/composition-api'
-import { debounce, throttle } from '@/study/源码实现/2.防抖节流'
 
 export default {
   setup() {
@@ -49,18 +48,15 @@ function useMousePosition() {
   }
 
   function log() {
-    console.log('111111111')
-    // console.log(`x：${e.pageX}，y：${e.pageY}`)
+    console.log(`x：${e.pageX}，y：${e.pageY}`)
   }
 
   onMounted(() => {
-    window.addEventListener('mousemove', throttle(log, 1000))
-    // window.addEventListener('mousemove', update)
+    window.addEventListener('mousemove', update)
   })
 
   onUnmounted(() => {
-    window.removeEventListener('mousemove', throttle(log, 1000))
-    // window.removeEventListener('mousemove', update)
+    window.removeEventListener('mousemove', update)
   })
 
   return { x, y }

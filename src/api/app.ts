@@ -8,4 +8,4 @@ export const login = (pramas: object) => post('/login', pramas)
 
 export const out = () => get('/out')
 
-export const getTest = () => get('/api/test')
+export const getUserInfo = () => post('/api/servlet/l/user/v1/userInfo')

@@ -97,7 +97,6 @@
 
 <script>
 import { useVuex, useQuerySearch, useCascader, useTable, useApi } from './hook'
-import '@/study/js继承的6种方式'
 
 export default {
   setup(props, { root }) {

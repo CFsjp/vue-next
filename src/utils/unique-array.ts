@@ -1,4 +1,4 @@
-const a = [1, 2, 3, 4, 2, 3, 1]
+// const a = [1, 2, 3, 4, 2, 3, 1]
 
 export function unique(arr: Array<any>) {
   // 适用于基础类型的数组
@@ -68,8 +68,8 @@ export function uniqueArrayByItem(arr: Array<any>) {
 // }
 
 export function uniqueArrayByKey(arr: Array<any>, key: string) {
-  let map = new Map()
-  arr.forEach((item, index) => {
+  const map = new Map()
+  arr.forEach((item) => {
     if (!map.has(item[key])) {
       map.set(item[key], item)
     }

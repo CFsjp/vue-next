@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router, { RouteConfig } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { nextTick } from 'vue/types/umd'
 
 Vue.use(Router)
 
@@ -10,62 +9,26 @@ const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/views/Home.vue')
+    component: () => import('@/views/Home.vue'),
+    meta: {
+      title: '首页'
+    }
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/views/About.vue')
-  },
-  {
-    path: '/api',
-    name: 'CompositionApi',
-    component: () => import('@/views/composition-api.vue')
-  },
-  {
-    path: '/amap',
-    name: 'gaoDeMap',
-    component: () => import('@/views/amap.vue')
-  },
-  {
-    path: '/upload',
-    name: 'upload',
-    component: () => import('@/components/upload.vue')
-  },
-  {
-    path: '/form',
-    name: 'form',
-    component: () => import('@/views/Form.vue')
-  },
-  {
-    path: '/count',
-    name: 'count',
-    component: () => import('@/views/count/index.vue')
-  },
-  {
-    path: '/animation',
-    name: 'animation',
-    component: () => import('@/views/animation/index.vue')
-  },
-  {
-    path: '/grid',
-    name: 'grid',
-    component: () => import('@/views/display-grid/index.vue')
-  },
-  {
-    path: '/selectTree',
-    name: 'selectTree',
-    component: () => import('@/views/selectTree.vue')
-  },
-  {
-    path: '/echarts',
-    name: 'echarts',
-    component: () => import('@/views/echarts-dome.vue')
+    path: '/dome',
+    name: 'studyDome',
+    component: () => import('@/views/study-dome/index.vue'),
+    meta: {
+      title: '学习页面'
+    }
   },
   {
     path: '*',
     name: '404',
-    component: () => import('@/views/404.vue')
+    component: () => import('@/views/404.vue'),
+    meta: {
+      title: '404页面'
+    }
   }
 ]
 
@@ -114,9 +77,8 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach((to) => {
-  // 进度条
-  NProgress.done();
-  // util.title(to.meta.title);
+  NProgress.done() // 进度条
+  document.title = to.meta.title
 })
 
 export default router
