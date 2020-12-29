@@ -6,11 +6,12 @@
     <br />
     <el-input
       class="w500px"
+      v-model.trim="input"
+      v-input-filter:number
       placeholder="请输入内容"
-      v-model="input"
-      oninput="value=value.replace(/[^\d]/g,'')"
+      clearable
     >
-      <template slot="prepend">只能输入纯数字的输入框:</template>
+      <template slot="prepend">输入正数、负数和小数的输入框:</template>
     </el-input>
     <div>{{ count }}</div>
     <el-button type="primary" @click="request" :loading="loading" round>

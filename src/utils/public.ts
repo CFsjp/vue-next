@@ -36,9 +36,9 @@ export function deepClone(target: any) {
 }
 
 // 防抖
-export function debounce(fn: Function, delay: number = 500) {
+export function debounce(fn: Function, delay: number = 1000) {
   let timer: number | null | undefined
-  return function(this: any, ...args: any) {
+  return function (this: any, ...args: any) {
     const ctx = this // 改变this指向为调用debounce所指的对象
     if (timer) {
       clearTimeout(timer)
@@ -53,7 +53,7 @@ export function debounce(fn: Function, delay: number = 500) {
 // 节流
 export function throttle(fn: Function, delay: number = 1000) {
   let canRun = true // 通过闭包保存一个标记
-  return function(this: any, ...args: any) {
+  return function (this: any, ...args: any) {
     const ctx = this
     if (!canRun) return
     canRun = false
