@@ -10,8 +10,32 @@ body,
   height: 100%;
 }
 
-h1, h2, h3, h4, h5 {
+a,a:focus,a:hover {
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  font-size: 0;
+  clear: both;
+}
+
+img{
+  vertical-align: middle;
+}
+
+h1, h2, h3, h4, h5, p, ul,li,ol {
   margin: 0;
+}
+
+ul,ol,li {
+  list-style: none;
 }
 
 /*---滚动条默认显示样式--*/
