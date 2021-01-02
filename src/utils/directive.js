@@ -6,3 +6,9 @@ import Vue from 'vue'
 import inputFilter from './inputFilter.js'
 
 Vue.directive('inputFilter', inputFilter)
+
+Vue.directive('blue', {
+  bind(el) {
+    el.style.backgroundColor = '#409EFF'
+  }
+})

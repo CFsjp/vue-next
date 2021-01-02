@@ -368,7 +368,7 @@ export default {
     },
     async request() {
       this.loading = true
-      const res = await getUserInfo()
+      await getUserInfo()
       setTimeout(() => {
         this.count++
         this.loading = false
