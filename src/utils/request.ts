@@ -4,10 +4,10 @@ import { Message } from 'element-ui'
 
 const baseUrl = process.env.NODE_ENV === 'development' ? DEVHOST : PROHOST
 class HttpRequest {
-  public queue: any
-  public constructor() {
+  constructor() {
     this.queue = {}
   }
+  queue: any
   getInsideConfig() {
     const config = {
       baseURL: baseUrl,
@@ -17,9 +17,9 @@ class HttpRequest {
   }
   destroy(url: string) {
     delete this.queue[url]
-    if (!Object.keys(this.queue).length) {
-      // hide loading
-    }
+    // if (!Object.keys(this.queue).length) {
+    //   // hide loading
+    // }
   }
   interceptors(instance: any, url?: string) {
     // 请求拦截
@@ -44,7 +44,7 @@ class HttpRequest {
           this.destroy(url)
         }
         const { data, status } = res
-        if (data.type == 'application/octet-stream') {
+        if (data.type === 'application/octet-stream') {
           return Object.assign(
             {},
             {
@@ -63,27 +63,38 @@ class HttpRequest {
         if (error && error.request) {
           const status = error.request.status
           switch (status) {
-            case 400: Message.error('请求错误')
+            case 400:
+              Message.error('请求错误')
               break
-            case 401: Message.error('接口配置未经授权！')
+            case 401:
+              Message.error('接口配置未经授权！')
               break
-            case 403: Message.error('拒绝访问')
+            case 403:
+              Message.error('拒绝访问')
               break
-            case 404: Message.error('请求地址出错')
+            case 404:
+              Message.error('请求地址出错')
               break
-            case 408: Message.error('请求超时')
+            case 408:
+              Message.error('请求超时')
               break
-            case 500: Message.error('服务器内部错误')
+            case 500:
+              Message.error('服务器内部错误')
               break
-            case 501: Message.error('服务未实现')
+            case 501:
+              Message.error('服务未实现')
               break
-            case 502: Message.error('网关错误')
+            case 502:
+              Message.error('网关错误')
               break
-            case 503: Message.error('服务不可用')
+            case 503:
+              Message.error('服务不可用')
               break
-            case 504: Message.error('网关超时')
+            case 504:
+              Message.error('网关超时')
               break
-            case 505: Message.error('HTTP版本不受支持')
+            case 505:
+              Message.error('HTTP版本不受支持')
               break
             default:
               Message({ message: '未知错误！', type: 'error', duration: 3000 })
