@@ -8,8 +8,9 @@ const argv = process.argv.splice(2)
 const BundleAnalyzerPlugin = argv.includes('--analyzer')
   ? [new (require('webpack-bundle-analyzer').BundleAnalyzerPlugin)()]
   : []
+const { push } = require('core-js/fn/array')
 const path = require('path')
-const resolve = (dir) => path.join(__dirname, dir)
+const resolve = dir => path.join(__dirname, dir)
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/ts/' : '/',
@@ -17,7 +18,7 @@ module.exports = {
 
   productionSourceMap: false, // 去掉.map文件
 
-  chainWebpack: (config) => {
+  chainWebpack: config => {
     // 修复HMR
     config.resolve.symlinks(true)
 

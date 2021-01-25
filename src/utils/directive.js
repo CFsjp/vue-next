@@ -12,3 +12,18 @@ Vue.directive('blue', {
     el.style.backgroundColor = '#409EFF'
   }
 })
+
+// 更为优秀的写法--js
+// import inputFilter from './inputFilter.js'
+
+// const directives = {
+//   inputFilter，
+// }
+
+// export default {
+//   install(Vue) {
+//     Object.keys(directives).forEach(key => {
+//       Vue.directive(key, directives[key])
+//     })
+//   }
+// }

@@ -1,4 +1,4 @@
-import { onMounted, ref } from '@vue/composition-api'
+import { onMounted, onUnmounted, ref } from '@vue/composition-api'
 import echarts from 'echarts'
 
 export function useEcharts() {
@@ -6,6 +6,10 @@ export function useEcharts() {
 
   onMounted(() => {
     renderEchart()
+  })
+
+  onUnmounted(() => {
+    pieEchart.value = null // 清除echart实例，防止内存泄漏
   })
 
   function renderEchart() {

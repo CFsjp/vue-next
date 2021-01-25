@@ -69,7 +69,7 @@ export function uniqueArrayByItem(arr: Array<any>) {
 
 export function uniqueArrayByKey(arr: Array<any>, key: string) {
   const map = new Map()
-  arr.forEach((item) => {
+  arr.forEach(item => {
     if (!map.has(item[key])) {
       map.set(item[key], item)
     }
