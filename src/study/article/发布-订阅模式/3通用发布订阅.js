@@ -1,4 +1,4 @@
-let event = {
+const event = {
   list: {},
   on(key, fn) {
     if (!this.list[key]) {
@@ -18,7 +18,7 @@ let event = {
     })
   },
   remove(key, fn) {
-    let fns = this.list[key]
+    const fns = this.list[key]
 
     if (!fns) return false
 

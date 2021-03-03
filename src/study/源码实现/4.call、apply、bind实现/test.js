@@ -48,15 +48,18 @@ fn.myApply(obj, ['我是lihua', '18'])
 
 Function.prototype.myBind = function(context, ...args) {
   if (typeof this !== 'function') {
-    throw new Error('Function.prototype.bind - what is trying to be bound is not callable')
+    throw new Error(
+      'Function.prototype.bind - what is trying to be bound is not callable'
+    )
   }
 
   const self = this
 
   let fbound = function() {
-    self.apply(this instanceof self
-      ? this
-      : context, args.concat(Array.prototype.slice.call(arguments)))
+    self.apply(
+      this instanceof self ? this : context,
+      args.concat(Array.prototype.slice.call(arguments))
+    )
   }
 
   fbound = Object.create(this.prototype)

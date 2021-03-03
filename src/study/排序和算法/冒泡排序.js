@@ -9,13 +9,17 @@
  * 即相等的两个数字的相对位置在排序前后不变，则该算法是稳定的
  */
 
-function bubbleSort(list) { // 冒泡排序优化写法
+function bubbleSort(list) {
+  // 冒泡排序优化写法
   for (let i = 0; i < list.length; i++) {
+    let flag = true
     for (let j = 0; j < list.length - 1 - i; j++) {
       if (list[j] > list[j + 1]) {
-        [list[j], list[j + 1]] = [list[j + 1], list[j]]
+        flag = false
+        [(list[j], list[j + 1])] = [list[j + 1], list[j]]
       }
     }
+    if (flag) break
   }
   return list
 }

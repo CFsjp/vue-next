@@ -18,48 +18,55 @@
 //   在单位时间内触发了一次就不在生效了，可以用一个flag来控制
 
 // 防抖源码
-export function debounce(fn, delay = 1000) {
-  // 默认 300毫秒
-  let timer
-  return function() {
-    const args = arguments
-
-    if (timer) {
-      clearTimeout(timer)
-    }
-
-    timer = setTimeout(() => {
-      fn.apply(this, args)
-    }, delay)
-  }
-}
+// export function debounce(fn, delay = 1000) {
+//   let timer
+//   return (...args) => {
+//     if (timer) clearTimeout(timer)
+//     timer = setTimeout(() => {
+//       fn.apply(this, args)
+//     }, delay)
+//   }
+// }
 
 // window.addEventListener(
-//   'scroll',
-//   debance(() => {
+//   'mousemove',
+//   debounce(() => {
 //     console.log(111)
 //   }, 1000)
 // )
 
 // 节流源码
-export function throttle(fn, delay = 2000) {
-  let flag = true
+// export function throttle(fn, delay = 2000) {
+//   let flag = true
 
-  return () => {
-    if (!flag) return
+//   return (...args) => {
+//     if (!flag) return
+//     flag = false
+//     setTimeout(() => {
+//       fn.apply(this, args)
+//       flag = true
+//     }, delay)
+//   }
+// }
 
-    flag = false
+window.addEventListener(
+  'mousemove',
+  // debounce throttle
+  throttle(speak, 1000)
+)
 
-    setTimeout(() => {
-      fn()
-      flag = true
-    }, delay)
-  }
+function speak(language = 'cn') {
+  console.log(language)
 }
 
-// window.addEventListener(
-//   'scroll',
-//   throttle(() => {
-//     console.log(111)
-//   }, 1000)
-// )
+function throttle(fn, wait) {
+  let flag = true
+  return (...args) => {
+    if (!flag) return
+    flag = false
+    setTimeout(() => {
+      fn.apply(this, args)
+      flag = true
+    }, wait)
+  }
+}

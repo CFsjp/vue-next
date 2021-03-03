@@ -16,6 +16,9 @@
  * 
  * @function errorCaptured 优雅的处理 async/await
  * @param asyncFunc 回调函数
+ * 
+ * @function thousandth 千分符
+ * @param num 传入的数字
  */
 
 export function deepClone(target: any) {
@@ -94,5 +97,17 @@ export async function errorCaptured(asyncFunc: () => any) {
     return [null, res]
   } catch (e) {
     return [e, null]
+  }
+}
+
+// 数字的千分符方法 1000 => 1,000
+export const thousandth = (num: number | string) => {
+  if (typeof num === 'number') {
+    return num.toLocaleString()
+  } else if (typeof num === 'string') {
+    const reg = /\d(?=(?:\d{3})+(?:\.\d+|$))/g;
+    return num.replace(reg, '$&,')
+  } else {
+    throw TypeError('期待输入的是一个number或者string类型的数字')
   }
 }

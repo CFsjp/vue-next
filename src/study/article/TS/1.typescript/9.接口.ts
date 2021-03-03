@@ -62,10 +62,10 @@ class Dog2 implements Ani,BlueBird {
     constructor(public name:string) {
         this.name = name;
     }
-    speak(something:string):void {
+    speak(something:string) {
         console.log('小狗 汪汪汪');
     }
-    fly():void {
+    fly() {
         console.log('会飞的小狗');
     }
     blueFly() {

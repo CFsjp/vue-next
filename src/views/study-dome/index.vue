@@ -63,11 +63,17 @@
         </li>
       </ul>
     </div>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="bubbly">气泡</div>
   </div>
 </template>
 
 <script>
 import { getUserInfo } from '@/api/app.ts'
+import '@/study/源码实现/2.防抖节流/index.js'
+
 export default {
   name: 'StudyDome',
   data() {
@@ -362,6 +368,9 @@ export default {
       chooseMsg: null
     }
   },
+  mounted() {
+    // window.onscroll = debounce(this.getMouseXY, 1000)
+  },
   methods: {
     goback() {
       this.$router.go(-1)
@@ -439,5 +448,69 @@ export default {
 }
 /deep/.search-text {
   color: #409eff;
+}
+
+.box1 {
+  /* 内部大小 */
+  width: 0px;
+  height: 0px;
+  /* 边框大小 只设置三条边*/
+  border-top: #4285f4 solid;
+  border-right: transparent solid;
+  border-left: transparent solid;
+  border-width: 85px;
+  /* 其他设置 可有可无*/
+  margin: 50px;
+}
+
+.box2 {
+  /* 内部大小 */
+  width: 0px;
+  height: 0px;
+  /* 边框大小 只设置两条边*/
+  border-top: #4285f4 solid;
+  border-right: transparent solid;
+  border-width: 85px;
+  /* 其他设置 */
+  margin: 50px;
+}
+
+.box3 {
+  /* 内部大小 */
+  width: 0px;
+  height: 0px;
+  /* 边框大小 */
+  border-top: #4285f4 170px solid;
+  border-right: transparent 85px solid;
+  border-left: transparent 85px solid;
+
+  /* 其他设置 */
+  margin: 50px;
+}
+
+.bubbly {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #00ccbb;
+  border-radius: 8px;
+  width: 200px;
+  padding: 40px 10px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+
+.bubbly:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  border: 34px solid transparent;
+  border-top-color: #00ccbb;
+  border-bottom: 0;
+  border-left: 0;
+  margin: 0 0 -34px -17px;
 }
 </style>
