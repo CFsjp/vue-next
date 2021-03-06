@@ -4,10 +4,7 @@ bindFn = (ctx, ...args) => {
   }
   const self = this
   let fn = function() {
-    self.apply(
-      this instanceof self ? this : ctx,
-      args.concat(Array.prototype.slice.call(arguments))
-    )
+    self.apply(this instanceof self ? this : ctx, args.concat([...arguments]))
   }
   fn = Object.create(this.prototype)
   return fn
@@ -183,6 +180,7 @@ function Child() {
 }
 Child.prototype = Object.create(Parent.prototype)
 Child.prototype.constructor = Child
+const child = new Child()
 
 const deepClone = target => {
   if (target && typeof target !== 'object') return target
@@ -229,5 +227,46 @@ class Event {
 
   emit(type, ...rest) {
     this.event[type] && this.event[type].forEach(fn => fn.apply(this, rest))
+  }
+}
+
+function myBindFn(ctx, ...args) {
+  if (typeof ctx !== 'function') {
+    throw new TypeError('error')
+  }
+  const self = this
+  let fn = function() {
+    self.apply(this instanceof self ? this : self, args.concat([...arguments]))
+  }
+  fn = Object.create(this.prototype)
+  return fn
+}
+
+function myNewFn(fn, ...args) {
+  if (typeof ctx !== 'function') {
+    throw new TypeError('error')
+  }
+  const obj = {}
+  obj.__proto__ = Object.create(fn.prototype)
+  const result = fn.apply(obj, args)
+  if ((result && typeof result === 'object') || typeof result === 'function') {
+    return result
+  }
+  return obj
+}
+
+class SyncHook {
+  constructor() {
+    this.hooks = []
+  }
+
+  // 订阅事件
+  tap(name, fn) {
+    this.hooks.push(fn)
+  }
+
+  // 发布
+  call() {
+    this.hooks.forEach(hook => hook(...arguments))
   }
 }

@@ -1,17 +1,17 @@
 console.log('开始学习js继承的6种方式')
 
 // super
-function Person(name) {
-  this.name = name
-}
+// function Person(name) {
+//   this.name = name
+// }
 
-Person.prototype.job = 'frontend'
-Person.prototype.sayHello = function() {
-  console.log('Hello ' + this.name)
-}
+// Person.prototype.job = 'frontend'
+// Person.prototype.sayHello = function() {
+//   console.log('Hello ' + this.name)
+// }
 
-const person = new Person('jia ming')
-person.sayHello() // Hello jia ming
+// const person = new Person('jia ming')
+// person.sayHello() // Hello jia ming
 
 /**
  * 原型链继承
@@ -119,3 +119,78 @@ person.sayHello() // Hello jia ming
 //     }
 // });
 // anotherPerson.sayHello(); // Hello come on
+
+// 1、原型链继承
+function Person(name) {
+  this.name = name
+}
+
+Person.prototype.job = 'frontend'
+Person.prototype.sayHello = function() {
+  console.log('Hello ' + this.name)
+}
+
+const person = new Person('jia ming')
+person.sayHello() // Hello jia ming
+
+// function Child(name) {
+//   this.name = name
+// }
+
+// Child.prototype = new Person()
+// const child = new Child('sheng')
+
+// 子类只能共有一个父类原型，当子类修改父类原型上的属性时，其它的都会被修改
+// 子类不能向父类构造函数传参
+
+// 2、借用构造函数继承
+// function Child(name) {
+//   Person.call(this, name)
+// }
+
+// const child = new Child('sheng')
+// 可以向父类构造函数传参，可以继承多个父类，但是无法继承父类原型上的属性
+
+// 3、组合继承
+// function Child(name) {
+//   Person.call(this, name)
+// }
+
+// Child.prototype = new Person()
+// const child = new Child('sheng')
+// 可以传参，可以继承父类原型上的属性了，但是会调用两次父类构造函数，比较耗内存，并且创建的实例和原型上存在两份相同的属性，比较臃肿
+
+// 4、原型式继承
+// function object(obj) {
+//   function F() {}
+//   F.prototype = obj
+//   return new F()
+// }
+// const super0 = new Person()
+// const super1 = object(super0)
+
+// 同原型链继承，属性会共享，修改后就变化了
+
+// 5、寄生组合式继承
+// 就是给原型式继承套个壳子
+// function subObject(o) {
+//   const sub = Object.create(o)
+//   sub.name = 'ming'
+//   return sub
+// }
+// const sub = subObject(new Person())
+
+// 没用到原型，无法复用
+
+// 6、寄生组合式继承
+function Child(type) {
+  // 可以传参
+  Person.call(this, type)
+  this.age = 18
+}
+// 获取原型链上的属性
+Child.prototype = Object.create(Person.prototype)
+// 修正子类的构造函数
+Child.prototype.constructor = Child
+
+// 可以传参，获取父类原型属性，不会创建两次父类构造函数

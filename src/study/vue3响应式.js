@@ -49,7 +49,8 @@ function createReativeObject(target) {
       if (!hadKey) {
         console.log('新增属性')
         trigger(target, 'add', key)
-      } else if (oldValue !== value) { // 不相等，则修改；否则，不修改
+      } else if (oldValue !== value) {
+        // 不相等，则修改；否则，不修改
         console.log('修改属性')
         trigger(target, 'set', key)
       } // 为了屏蔽无意义的修改
@@ -67,7 +68,7 @@ function createReativeObject(target) {
   return observed
 }
 
-const proxy = reactive({ a: { name: 'sjp' }}) // 多层代理
+const proxy = reactive({ a: { name: 'sjp' } }) // 多层代理
 // proxy.name
 proxy.name = '123'
 // delete proxy.name
@@ -81,16 +82,18 @@ proxyArr.push(4)
 const activeEffectStacks = [] // 栈型结果
 const targetsMap = new WeakMap()
 
-function track(target, key) { // 如果这个target中的key变化了 就执行数组中的方法
+function track(target, key) {
+  // 如果这个target中的key变化了 就执行数组中的方法
   const effect = activeEffectStacks[activeEffectStacks.length - 1]
-  if (effect) { // 有对应关系 创建关联
+  if (effect) {
+    // 有对应关系 创建关联
     let depsMap = targetsMap.get(target)
     if (!depsMap) {
-      targetsMap.set(target, depsMap = new Map())
+      targetsMap.set(target, (depsMap = new Map()))
     }
     let deps = depsMap.get(key)
     if (!deps) {
-      depsMap.set(key, deps = new Set())
+      depsMap.set(key, (deps = new Set()))
     }
     if (!deps.has(effect)) {
       deps.add(effect)
@@ -118,7 +121,8 @@ function effect(fn) {
   effect()
 }
 function createReactiveEffect(fn) {
-  const effect = function() { // 创建的响应式的effect
+  const effect = function() {
+    // 创建的响应式的effect
     return run(effect, fn) // 运行 1.让fn运行， 第二个就是把这个effect存到栈中
   }
   return effect
@@ -129,13 +133,13 @@ function run(effect, fn) {
     fn()
   } finally {
     activeEffectStacks.pop(effect)
-
   }
 }
 
 // 依赖收集 发布订阅
 const obj = reactive({ name: 'sjp' })
-effect(() => { // effect 会执行两次，默认先执行一次 之后依赖的数据变化了 会再次执行
+effect(() => {
+  // effect 会执行两次，默认先执行一次 之后依赖的数据变化了 会再次执行
   console.log(obj.name)
 })
 obj.name = 'wyl'
