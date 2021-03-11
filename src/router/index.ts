@@ -11,7 +11,7 @@ const routes: RouteConfig[] = [
     name: 'Home',
     component: () => import(/* webpackChunkName: "Home" */ '@/views/Home.vue'),
     meta: {
-      title: '首页'
+      title: '花生酱~首页'
     }
   },
   {
@@ -19,7 +19,7 @@ const routes: RouteConfig[] = [
     name: 'studyDome',
     component: () => import(/* webpackChunkName: "studyDome" */ '@/views/study-dome/index.vue'),
     meta: {
-      title: '学习页面'
+      title: '花生酱~学习页面'
     }
   },
   {
@@ -27,7 +27,7 @@ const routes: RouteConfig[] = [
     name: '404',
     component: () => import(/* webpackChunkName: "404" */ '@/views/404.vue'),
     meta: {
-      title: '404页面'
+      title: '花生酱~404页面'
     }
   }
 ]

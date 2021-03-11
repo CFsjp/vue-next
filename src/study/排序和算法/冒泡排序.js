@@ -12,14 +12,11 @@
 function bubbleSort(list) {
   // 冒泡排序优化写法
   for (let i = 0; i < list.length; i++) {
-    let flag = true
     for (let j = 0; j < list.length - 1 - i; j++) {
       if (list[j] > list[j + 1]) {
-        flag = false
-        [(list[j], list[j + 1])] = [list[j + 1], list[j]]
+        ;[list[j], list[j + 1]] = [list[j + 1], list[j]]
       }
     }
-    if (flag) break
   }
   return list
 }

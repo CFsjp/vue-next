@@ -72,7 +72,7 @@
 
 <script>
 import { getUserInfo } from '@/api/app.ts'
-import '@/study/源码实现/2.防抖节流/index.js'
+// import '@/study/源码实现/2.防抖节流/index.js'
 
 export default {
   name: 'StudyDome',

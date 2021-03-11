@@ -63,8 +63,8 @@ class Mypromise {
     rejectCallback =
       typeof rejectCallback !== 'function'
         ? err => {
-          throw err
-        }
+            throw err
+          }
         : rejectCallback
     // 为了保持链式调用  继续返回promise
     return new Mypromise((resolve, reject) => {

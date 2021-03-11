@@ -1,6 +1,6 @@
 /**
  * new操作符
- * 
+ *
  * new 到底干了什么？
  * 创建一个空的对象{}
  * 链接该对象到另一个对象
@@ -45,6 +45,41 @@ function muNew(fn, ...args) {
   }
 
   // 不然直接返回boj
+  return obj
+}
+function myBind(ctx, ...args) {
+  if (typeof this !== 'function') {
+    throw new TypeError('error')
+  }
+
+  const self = this
+  let fn = function() {
+    self.apply(this instanceof self ? this : self, args.concat([...arguments]))
+  }
+  fn = Object.create(this.prototype)
+  return fn
+}
+
+function myCall(ctx, ...args) {
+  if (typeof this !== 'function') {
+    throw new TypeError('error')
+  }
+  const key = Symbol('key')
+  ctx[key] = this
+  const result = ctx[key](...args)
+  delete ctx[key]
+  return result
+}
+
+function myNuwe(fn, ...args) {
+  if (typeof this !== 'function') {
+    throw new TypeError('error')
+  }
+  const obj = Object.create(fn.prototype)
+  const result = fn.apply(obj, args)
+  if ((result && typeof result === 'object') || typeof result === 'function') {
+    return result
+  }
   return obj
 }
 

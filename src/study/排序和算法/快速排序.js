@@ -33,8 +33,33 @@ function quickSort(arr) {
   return quickSort(l).concat(c, quickSort(r))
 }
 
-
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-  11, 12, 13, 15, 16, 17, 19, 20, 35, 40, 50, 55, 60, 70, 80, 100]
+const arr = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  15,
+  16,
+  17,
+  19,
+  20,
+  35,
+  40,
+  50,
+  55,
+  60,
+  70,
+  80,
+  100
+]
 
 console.log(quickSort(arr))
