@@ -1,17 +1,5 @@
 <template>
   <div class="home">
-<<<<<<< HEAD
-    <h1>你好！首页</h1>
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-
-export default defineComponent({
-  name: 'Home'
-})
-=======
     <h1 class="title">welcome to my home page!</h1>
     <div class="btn-wrap">
       <el-button type="primary" @click="go('/dome')" round>
@@ -30,7 +18,6 @@ export default {
     }
   }
 }
->>>>>>> dev
 </script>
 
 <style lang="scss" scoped>
