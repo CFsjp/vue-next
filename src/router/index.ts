@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router, { RouteConfig } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { nextTick } from 'vue/types/umd'
 
 Vue.use(Router)
 
@@ -10,27 +9,42 @@ const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/views/Home.vue')
+    component: () => import(/* webpackChunkName: "Home" */ '@/views/Home.vue'),
+    meta: {
+      title: '花生酱~首页'
+    }
   },
   {
-    path: '/api',
-    name: 'CompositionApi',
-    component: () => import('@/views/composition-api.vue')
+    path: '/dome',
+    name: 'studyDome',
+    component: () => import(/* webpackChunkName: "studyDome" */ '@/views/study-dome/index.vue'),
+    meta: {
+      title: '花生酱~学习页面'
+    }
   },
   {
     path: '/amap',
-    name: 'gaoDeMap',
-    component: () => import('@/views/amap.vue')
+    name: 'amap',
+    component: () => import(/* webpackChunkName: "studyDome" */ '@/views/amap/index.vue'),
+    meta: {
+      title: '花生酱~amap页面'
+    }
   },
   {
     path: '/animation',
     name: 'animation',
-    component: () => import('@/views/animation/index.vue')
+    component: () => import(/* webpackChunkName: "studyDome" */ '@/views/animation/index.vue'),
+    meta: {
+      title: '花生酱~animation'
+    }
   },
   {
     path: '*',
     name: '404',
-    component: () => import('@/views/404.vue')
+    component: () => import(/* webpackChunkName: "404" */ '@/views/404.vue'),
+    meta: {
+      title: '花生酱~404页面'
+    }
   }
 ]
 
@@ -79,9 +93,8 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach((to) => {
-  // 进度条
-  NProgress.done();
-  // util.title(to.meta.title);
+  NProgress.done() // 进度条
+  document.title = to.meta.title
 })
 
 export default router

@@ -8,8 +8,12 @@ const argv = process.argv.splice(2)
 const BundleAnalyzerPlugin = argv.includes('--analyzer')
   ? [new (require('webpack-bundle-analyzer').BundleAnalyzerPlugin)()]
   : []
+
 const path = require('path')
-const resolve = (dir) => path.join(__dirname, dir)
+const resolve = dir => path.join(__dirname, dir)
+
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/ts/' : '/',
@@ -17,12 +21,25 @@ module.exports = {
 
   productionSourceMap: false, // 去掉.map文件
 
-  chainWebpack: (config) => {
+  chainWebpack: config => {
     // 修复HMR
     config.resolve.symlinks(true)
 
     // 添加别名
     config.resolve.alias.set('@', resolve('src'))
+
+    if (process.env.NODE_ENV === 'production') {
+      config.plugin('compressionPlugin').use(
+        new CompressionWebpackPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: productionGzipExtensions,
+          threshold: 10240,
+          minRatio: 0.8,
+          deleteOriginalAssets: true
+        })
+      )
+    }
   },
 
   devServer: {

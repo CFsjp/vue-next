@@ -20,3 +20,19 @@ server.on('request', (req, res) => {
 server.listen(3000, () => {
   console.log('服务在3000端口启动了...')
 })
+
+
+const data = new Map([
+  ['key1', '数据1'],
+  ['key2', '数据2'],
+  ['key3', '数据3']
+])
+
+// 加数据就set，修改也set
+data.set('key4', '数据4')
+
+// 修改就是多一步
+if (data.has('key4')) {
+  const oldVal = data.get('key4')
+  data.set('key4', '数据4')
+}
