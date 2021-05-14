@@ -3,7 +3,7 @@
     <div class="error404-body-con">
       <el-card class="box-card">
         <div class="error404-body-con-title">
-          4<span>&nbsp;&nbsp;0&nbsp;&nbsp;</span>4
+          4<span>&nbsp;&nbsp;0&nbsp;&nbsp;</span>41231
         </div>
         <p class="error404-body-con-message">
           YOU&nbsp;&nbsp;LOOK&nbsp;&nbsp;LOST
