@@ -32,7 +32,7 @@ export default {
     const { x, y } = useMousePosition()
 
     onMounted(() => {
-      highSpan.value.innerText = '111'
+      // highSpan.value.innerText = '111'
     })
 
     return { flag, highSpan, x, y }

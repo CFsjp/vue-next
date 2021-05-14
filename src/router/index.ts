@@ -23,6 +23,22 @@ const routes: RouteConfig[] = [
     }
   },
   {
+    path: '/amap',
+    name: 'amap',
+    component: () => import(/* webpackChunkName: "studyDome" */ '@/views/amap/index.vue'),
+    meta: {
+      title: '花生酱~amap页面'
+    }
+  },
+  {
+    path: '/animation',
+    name: 'animation',
+    component: () => import(/* webpackChunkName: "studyDome" */ '@/views/animation/index.vue'),
+    meta: {
+      title: '花生酱~animation'
+    }
+  },
+  {
     path: '*',
     name: '404',
     component: () => import(/* webpackChunkName: "404" */ '@/views/404.vue'),

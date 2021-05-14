@@ -94,6 +94,7 @@ export function useEcharts() {
       ]
     }
     chart.setOption(option)
+    window.onresize = chart.resize
   }
 
   return { pieEchart, renderEchart }
