@@ -57,7 +57,7 @@ const router = new Router({
  * 权限验证
  */
 router.beforeEach(async (to, from, next) => {
-  NProgress.start() // 进度条
+  NProgress.start() // 进度条 
   // // 验证当前路由所有的匹配中是否需要有登录验证的
   // if (to.matched.some((r) => r.meta.auth)) {
   //   // 是否存有token作为验证是否登录的条件
