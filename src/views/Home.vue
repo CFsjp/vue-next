@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="title">welcome to my home page!</h1>
+    <h1 class="title">welcome to my home page!试着玩</h1>
     <div class="btn-wrap">
       <el-button type="primary" @click="go('/dome')" round>
         study-dome
