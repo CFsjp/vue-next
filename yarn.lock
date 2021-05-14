@@ -1326,10 +1326,10 @@
   optionalDependencies:
     prettier "^1.18.2"
 
-"@vue/composition-api@^1.0.0-rc.3":
-  version "1.0.0-rc.7"
-  resolved "https://registry.nlark.com/@vue/composition-api/download/@vue/composition-api-1.0.0-rc.7.tgz#05a9e81ad91d85d3390b1386c0079666d2e1b3bb"
-  integrity sha1-BanoGtkdhdM5CxOGwAeWZtLhs7s=
+"@vue/composition-api@^1.0.0-rc.7":
+  version "1.0.0-rc.8"
+  resolved "https://registry.nlark.com/@vue/composition-api/download/@vue/composition-api-1.0.0-rc.8.tgz?cache=0&sync_timestamp=1619671377114&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcomposition-api%2Fdownload%2F%40vue%2Fcomposition-api-1.0.0-rc.8.tgz#ace0f1c8cc7d5b193825fabdc7c4b919bb182a9e"
+  integrity sha1-rODxyMx9Wxk4Jfq9x8S5GbsYKp4=
   dependencies:
     tslib "^2.2.0"
 
