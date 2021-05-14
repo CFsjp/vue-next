@@ -8,21 +8,6 @@
       点击打开 Dialog
     </el-button>
     <son-dialog :dialog-visible.sync="dialogVisible" />
-    <!-- <el-select v-model="value" placeholder="请选择">
-      <el-option-group
-        v-for="group in options"
-        :key="group.label"
-        :label="group.label"
-      >
-        <el-option
-          v-for="item in group.options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
-        </el-option>
-      </el-option-group>
-    </el-select> -->
     <h1>{{ time.now }}</h1>
     <el-button @click="addDay">
       day + 1
