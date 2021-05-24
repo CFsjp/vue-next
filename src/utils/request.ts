@@ -115,10 +115,10 @@ class HttpRequest {
 
 const serve = new HttpRequest()
 
-export const post = (url: string, params?: any) => {
+export const post = (url: string, data?: any) => {
   return serve.request({
     url,
-    params,
+    data,
     method: 'POST'
   })
 }
